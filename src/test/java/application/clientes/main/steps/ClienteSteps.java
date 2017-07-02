@@ -49,6 +49,8 @@ public class ClienteSteps extends AbstractSteps<ClienteAtributos, ClienteValidac
 //        validations.validarTextoById(getAtributos().tel2class, tel2);
     }
 
+
+
     public ClienteSteps(){
         validations = new ClienteValidacionesSteps();
         atributos = new ClienteAtributos();

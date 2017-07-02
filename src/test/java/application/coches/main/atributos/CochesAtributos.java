@@ -19,10 +19,10 @@ public class CochesAtributos extends AtributosGenerales {
     public final String numBastidorClass    = "numBastidorClass";
     public final String clienteClass        = "numBastidorClass";
 
-    public final String modeloFiltro    = "modelo";
-    public final String marcaFiltro     = "marca";
-    public final String matriculaFiltro = "matricula";
-    public final String nombreFiltro    = "nombreApellido";
+    public final String inputModeloFiltroName    = "entity.modelo";
+    public final String inputMarcaFiltroName     = "entity.marca";
+    public final String inputMatriculaFiltroName = "entity.matricula";
+    public final String inputNombreFiltroName    = "entity.nombre o Apellido";
 
 
 

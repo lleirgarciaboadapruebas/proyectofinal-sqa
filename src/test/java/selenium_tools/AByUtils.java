@@ -20,6 +20,8 @@ public class AByUtils {
         return By.cssSelector(css);
     }
 
+    public By byName(String name) { return By.name(name); }
+
     public By byValue(String value){
         return By.cssSelector("*[value='"+ value + "'");
     }

@@ -1,5 +1,6 @@
 package application.coches.test;
 
+import application.clientes.main.steps.ClienteProcessSteps;
 import application.coches.main.interfaces.CocheStepInterface;
 import application.coches.main.steps.CochesStepsProcess;
 import application.coches.main.validaciones.CochesValidacionesProcesosAction;
@@ -23,8 +24,37 @@ public class Test1 extends ABaseTestCase implements CocheStepInterface{
     }
 
     @Test
-    public void test1(){
+    public void t_ir_listado_coches() throws Exception{
         stepsProcess.irListadoCoches();
+    }
+
+    @Test public void t_validar_clientes_existentes() throws Exception {
+        String nombre = "Pepe";
+        String apellidos = "Rubianes";
+        String complete = nombre +" "+ apellidos;
+
+        stepsProcessCliente.crearCliente("45928374-B", nombre, apellidos, "Pasage Z, nº 20", "Cardedeu", "637283942", null);
+        stepsProcess.irListadoCoches();
+        stepsProcess.getSteps().crear();
+        validations.validarClienteSeleccionableEnCreacionCoche(complete);
+    }
+
+    @Test public void t_validar_cliente_creado_existente() throws Exception{
+
+    }
+
+    @Test public void t_validar_creacion_listado() throws Exception {
+        String matricula = "2304 HPE";
+        stepsProcess.irListadoCoches();
+        stepsProcess.crearCoche(matricula,  "Mercedes", "CLK 200", "180000", "3424-5433-2345-3424", "Cliente");
+        validations.validarCreacionEnListado(matricula);
+    }
+
+    @Test public void t_validar_filtro_modelo(){
+        String modelo = "Clio";
+        stepsProcess.irListadoCoches();
+        stepsProcess.filtrarPor(modelo, null, null, null);
+        validations.validarFiltrado(true, "Modelo", modelo);
     }
 
 
@@ -54,8 +84,9 @@ public class Test1 extends ABaseTestCase implements CocheStepInterface{
     }
 
 
-    private CochesStepsProcess stepsProcess;
-    private CochesValidacionesProcesosAction validations;
+    private CochesStepsProcess stepsProcess = new CochesStepsProcess();
+    private CochesValidacionesProcesosAction validations = new CochesValidacionesProcesosAction();
+    private ClienteProcessSteps stepsProcessCliente = new ClienteProcessSteps();
 
     @Override
     public CochesStepsProcess getStepsProcess() {
@@ -65,5 +96,10 @@ public class Test1 extends ABaseTestCase implements CocheStepInterface{
     @Override
     public CochesValidacionesProcesosAction getValidationsProcess() {
         return validations;
+    }
+
+    @Override
+    public ClienteProcessSteps getStepsProcessCliente() {
+        return stepsProcessCliente;
     }
 }

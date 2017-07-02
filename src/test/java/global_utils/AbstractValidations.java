@@ -53,12 +53,12 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         return false;
     }
 
-    protected void validarTextoById(String id, String expected, String msg) {
+    protected void validarTextoById(String id, String expected) {
         write("Validacion de texto by ID");
         validarCampoExistenteById(id);
         String strPantalla = (getDriverUtils().getInputValueByContainsId(id));        //.isEmpty() ? getTextoByContainsId(id) : getTextoById(id));
         if (!eq(strPantalla, expected))
-            error(msg);
+            error("Se esperaba el texto '"+ expected + "' pero se encontró '"+ strPantalla + "'");
 
     }
 

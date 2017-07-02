@@ -37,6 +37,27 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         validations.validarPantallaCreacion(validations.isDetailed());
     }
 
+    public void insertarModeloEnFiltro(String modelo) {
+        driver.writeStep(driver.getNameMethod());
+        driver.introDatosInputByName(atributos.inputModeloFiltroName, modelo);
+    }
+
+    public void insertarMarcaEnFiltro(String marca) {
+        driver.writeStep(driver.getNameMethod());
+        driver.introDatosInputByName(atributos.inputMarcaFiltroName, marca);
+
+    }
+
+    public void insertarMatriculaEnFiltro(String matricula) {
+        driver.writeStep(driver.getNameMethod());
+        driver.introDatosInputByName(atributos.inputMatriculaFiltroName, matricula);
+    }
+
+    public void insertarNombreOApellido(String nombreOApellidos) {
+        driver.writeStep(driver.getNameMethod());
+        driver.introDatosInputByName(atributos.inputNombreFiltroName, nombreOApellidos);
+    }
+
     @Override
     public void filtrar() {
         driver.writeStep(driver.getNameMethod());
@@ -119,7 +140,6 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         driver.writeStep(driver.getNameMethod());
         validations.validarCampoExistenteCliente(validations.isDetailed());
         driver.selecTextByClass(getAtributos().matriculaClass, cliente);
-        validations.validarCliente(cliente);
     }
 
     private CocheValidacionesSteps validations;

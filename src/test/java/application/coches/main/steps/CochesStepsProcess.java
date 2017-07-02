@@ -13,6 +13,43 @@ public class CochesStepsProcess extends AbstractStepsProcess<CochesSteps, Coches
         steps.clickEnMenuCoches();
     }
 
+    public void crearCoche(String matricula, String marca, String modelo, String kmActuales, String numBastidor, String cliente){
+        irListadoCoches();
+        steps.crear();
+        steps.insertarMatricula(matricula);
+        steps.insertarMarca(marca);
+        steps.insertarModelo(modelo);
+        steps.insertarKmActuales(kmActuales);
+        steps.insertarNumBastidor(numBastidor);
+        steps.seleccionarCliente(cliente);
+        steps.guardarDatos();
+    }
+
+    public void editarCoche(String matricula, String newMatricula, String marca, String modelo, String kmActuales, String numBastidor, String cliente){
+        irListadoCoches();
+        steps.editarEnListado(matricula);
+        steps.insertarMatricula(matricula);
+        steps.insertarMarca(marca);
+        steps.insertarModelo(modelo);
+        steps.insertarKmActuales(kmActuales);
+        steps.insertarNumBastidor(numBastidor);
+        steps.seleccionarCliente(cliente);
+    }
+
+    public void eliminarCoche(String matricula){
+        irListadoCoches();
+        steps.eliminar(matricula);
+    }
+
+    public void filtrarPor(String modelo, String marca, String matricula, String nombreOApellido){
+        irListadoCoches();
+        steps.insertarModeloEnFiltro(modelo);
+        steps.insertarMarcaEnFiltro(marca);
+        steps.insertarMatriculaEnFiltro(matricula);
+        steps.insertarNombreOApellido(nombreOApellido);
+        steps.filtrar();
+    }
+
     private CochesSteps steps;
     private CochesValidacionesProcesosAction validations;
 

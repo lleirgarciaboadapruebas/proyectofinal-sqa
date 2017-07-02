@@ -5,6 +5,13 @@ package application.clientes.main.steps;
  */
 public class ClienteProcessSteps {
 
-    // metemos los procesos que hay el el modulo de cliente
+    public void crearCliente(String nif, String nombre, String apellido, String direccion, String localidad, String telefono1, String telefono2){
+
+    }
+
+    public void editarCliente(){
+
+    }
+
 
 }

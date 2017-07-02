@@ -243,6 +243,10 @@ public class ADriverUtils {
         introDatosInput(byUtils.byCss(css), cadenaTexto);
     }
 
+    public void introDatosInputByName(String name, String cadenaTexto){
+        introDatosInput(byUtils.byName(name), cadenaTexto);
+    }
+
     private void introDatosInput(By by, String cadenaTexto){
         findElement(by).clear();
         findElement(by).sendKeys(cadenaTexto);

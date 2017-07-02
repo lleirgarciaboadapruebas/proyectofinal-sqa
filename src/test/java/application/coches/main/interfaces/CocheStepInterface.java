@@ -1,5 +1,6 @@
 package application.coches.main.interfaces;
 
+import application.clientes.main.steps.ClienteProcessSteps;
 import application.coches.main.steps.CochesSteps;
 import application.coches.main.steps.CochesStepsProcess;
 import application.coches.main.validaciones.CocheValidacionesSteps;
@@ -12,4 +13,5 @@ public interface CocheStepInterface {
 
     public CochesStepsProcess getStepsProcess();
     public CochesValidacionesProcesosAction getValidationsProcess();
+    public ClienteProcessSteps getStepsProcessCliente();
 }

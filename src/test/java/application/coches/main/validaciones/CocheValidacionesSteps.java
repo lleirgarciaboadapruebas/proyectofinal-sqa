@@ -90,24 +90,29 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
 
 
 
-    public void validarMatricula(String expectedMatricula){
-
+    public void validarMatricula(boolean isDetailed, String expectedMatricula){
+        if(isDetailed)
+            validarTextoById(atributos.matriculaClass, expectedMatricula);
     }
 
-    public void validarMarca(String expectedMarca){
-
+    public void validarMarca(boolean isDetailed, String expectedMarca){
+        if(isDetailed)
+            validarTextoById(atributos.marcaClass, expectedMarca);
     }
 
-    public void validarModelo(String expectedModelo){
-
+    public void validarModelo(boolean isDetailed, String expectedModelo){
+        if(isDetailed)
+            validarTextoById(atributos.modeloClass, expectedModelo);
     }
 
-    public void validarKmActuales(String expectedkm){
-
+    public void validarKmActuales(boolean isDetailed, String expectedkm){
+        if(isDetailed)
+            validarTextoById(atributos.kmActualesClass, expectedkm);
     }
 
-    public void validarCliente(String expectedClient){
-
+    public void validarCliente(boolean isDetailed, String expectedClient){
+        if(isDetailed)
+            validarTextoById(atributos.clienteClass, expectedClient);
     }
 
 
