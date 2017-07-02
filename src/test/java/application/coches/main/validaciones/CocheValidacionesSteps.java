@@ -10,16 +10,37 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
 
     /**Valido pantalla de listado coches. */
     public void validarPantallaListado(boolean isDetailed){
-        if(isDetailed) {
-            validarTituloEncabezado(isDetailed);
-            validarExistenciaButtonCrearCoche(isDetailed);
-            validarExistenciaTablaCoches(isDetailed);
-        }
+        validarTituloEncabezado(isDetailed);
+        validarExistenciaButtonCrearCoche(isDetailed);
+        validarExistenciaTablaCoches(isDetailed);
+    }
+
+    /**
+     * Valido campos existentes en pantalla creacion.
+     */
+    public void validarPantallaCreacion(boolean isDetailed) {
+        validarCampoExistenteMatricula(isDetailed);
+        validarCampoExistenteModelo(isDetailed);
+        validarCampoExistenteMarca(isDetailed);
+        validarCampoExistenteKmActuales(isDetailed);
+        validarCampoExistenteCliente(isDetailed);
+    }
+
+    /**
+     * valida campos existentes en pantalla vista de un coche.
+     */
+    public void validarPantallaVista(boolean isDetailed) {
+
+    }
+
+    public void validarPantallaModificacion(boolean isDetailed) {
+
+
     }
 
     public void validarExistenciaButtonCrearCoche(boolean isDetailed) {
-        if(isDetailed)
-            esVisible(getDriverUtils().getByUtils().byId(atributos.btnCrearId));
+        if (isDetailed)
+            esVisible(getDriverUtils().getByUtils().byId(atributos.selectorBtnCrear));
     }
 
     public void validarExistenciaTablaCoches(boolean isDetailed){
@@ -49,15 +70,7 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
                     "Se esperaba el titulo '"+ atributos.labelTitleText + "' pero no coincidió.");
     }
 
-    /** Valido campos existentes en pantalla creacion. */
-    public void validarPantallaCreacion(boolean isDetailed){
-            validarCampoExistenteMatricula(isDetailed);
-            validarCampoExistenteModelo(isDetailed);
-            validarCampoExistenteMarca(isDetailed);
-            validarCampoExistenteKmActuales(isDetailed);
-            validarCampoExistenteCliente(isDetailed);
-    }
-
+    
     public void validarCampoExistenteMatricula(boolean isDetailed){
         if(isDetailed)
             validarCampoExistenteById(atributos.matriculaClass);
@@ -79,8 +92,8 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
     }
 
     public void validarCampoExistenteCliente(boolean isDetailed){
-        if(isDetailed)
-            validarCampoExistenteById(atributos.clienteClass);
+        if (isDetailed)
+            validarCampoExistenteById(atributos.selectClienteId);
     }
 
     public void validarCampoExistenteNumBastidor(boolean isDetailed){
@@ -111,13 +124,34 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
     }
 
     public void validarCliente(boolean isDetailed, String expectedClient){
-        if(isDetailed)
-            validarTextoById(atributos.clienteClass, expectedClient);
+        if (isDetailed)
+            validarTextoById(atributos.selectClienteId, expectedClient);
+    }
+
+
+    public void validarCreacionEnListado(String matricula) {
+        // buscar texto en listado
+    }
+
+    public void validarCocheSeleccionableEnCreacionFactura(String coche) {
+        // cojer todoo el combo y mirar
+    }
+
+    public void validarClienteSeleccionableEnCreacionCoche(String cliente) {
+        validarOptionDisponibleEnCombo(atributos.selectClienteId, cliente);
+    }
+
+    public void validarFiltrado(boolean isDetailed, String filtroAplicado, String textoExpected) {
+//        if(isDetailed)
+        // validar filtrado segun campo
+        // segun el filtroAplicado se cogera un <td> u otro (podria hacer mas metodos "validarFiltradoXXXX"
+        // coger y mirar si todas las filas son del textExpected.
+
     }
 
 
     private CochesAtributos atributos;
-
+    
 
     public CocheValidacionesSteps () {
         atributos = new CochesAtributos();

@@ -6,5 +6,4 @@ package application.facturas;
 public class FacturasAtributos {
 
 
-
 }

@@ -3,12 +3,9 @@ package application.coches.main.steps;
 import application.coches.main.atributos.CochesAtributos;
 import application.coches.main.validaciones.CocheValidacionesSteps;
 import application.menu_top.steps.MenuTopSteps;
-import application.menu_top.validations.MenuTopValidationSteps;
-import global_utils.AbstractSteps;
 import global_utils.AbstractStepsAndNavigation;
 import global_utils.interfaces.GeneralStepsInterface;
 import selenium_tools.ADriverUtils;
-import selenium_tools.DriverUtils;
 
 /**
  *  @author Lleir Garcia -- lleirgarica@gmail.com
@@ -21,15 +18,14 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         validations.validarPantallaListado(validations.isDetailed());
     }
 
-    @Override
     public void crear(){
         driver.writeStep(driver.getNameMethod());
+        driver.waitForElementPresentWithCss(atributos.selectorBtnCrear);
         validations.validarExistenciaButtonCrearCoche(validations.isDetailed());
-        driver.clickButtonById(atributos.btnCrearId);
+        driver.clickByCss(atributos.selectorBtnCrear);
         validations.validarPantallaCreacion(validations.isDetailed());
     }
 
-    @Override
     public void volver() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonVolverAtras(validations.isDetailed());
@@ -58,7 +54,6 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         driver.introDatosInputByName(atributos.inputNombreFiltroName, nombreOApellidos);
     }
 
-    @Override
     public void filtrar() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonFiltrar(validations.isDetailed());
@@ -66,7 +61,6 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         validations.validarPantallaCreacion(validations.isDetailed());
     }
 
-    @Override
     public void editarDatos() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonCrearCoche(validations.isDetailed());
@@ -74,21 +68,18 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         validations.validarPantallaCreacion(validations.isDetailed());
     }
 
-    @Override
     public void guardarDatos() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonGuardarDatos(validations.isDetailed());
         driver.clickButtonById(atributos.btnCrearId);
     }
 
-    @Override
     public void cancelarDatos() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonCrearCoche(validations.isDetailed());
         driver.clickButtonById(atributos.btnCrearId);
     }
 
-    @Override
     public void editarEnListado(String id) {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonCrearCoche(validations.isDetailed());
@@ -96,7 +87,6 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         validations.validarPantallaCreacion(validations.isDetailed());
     }
 
-    @Override
     public void eliminar(String id) {
         driver.writeStep(driver.getNameMethod());
     }
@@ -142,6 +132,7 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         driver.selecTextByClass(getAtributos().matriculaClass, cliente);
     }
 
+
     private CocheValidacionesSteps validations;
     private CochesAtributos atributos;
     private MenuTopSteps menuSteps;
@@ -153,8 +144,6 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         driver = new ADriverUtils();
         menuSteps = new MenuTopSteps();
     }
-
-
 
     @Override
     public CocheValidacionesSteps getValidations() {

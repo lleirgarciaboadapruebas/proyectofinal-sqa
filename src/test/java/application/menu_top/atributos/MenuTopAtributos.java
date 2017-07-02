@@ -9,6 +9,7 @@ public class MenuTopAtributos {
     public final String liClienteId = "cliente";
     public final String liCocheId = "coche";
 
+
     public final String liMenuSelectedClass = "tab-menu-seleccionado";
     public final String labelTituloEncabezadoClass = "encabezado-modulo-interior-title";
 

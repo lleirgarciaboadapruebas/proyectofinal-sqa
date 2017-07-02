@@ -5,7 +5,8 @@ package global_utils;
  */
 public abstract class AbstractStepsProcess<Steps, Validations> {
 
-    public abstract Steps getSteps();
-    public abstract Validations getValidations();
+    protected abstract Steps getSteps();
+
+    protected abstract Validations getValidations();
 
 }

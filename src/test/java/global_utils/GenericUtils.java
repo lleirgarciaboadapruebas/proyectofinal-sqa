@@ -1,8 +1,8 @@
 package global_utils;
 
-import selenium_tools.ADriverUtils;
-
 import java.util.Random;
+
+import selenium_tools.ADriverUtils;
 
 public class GenericUtils {
 	
@@ -11,9 +11,9 @@ public class GenericUtils {
 	public GenericUtils(ADriverUtils d){
 		this.driverUtils = d;
 	}
-	
-	public int randomNumberBetween(){
-	    int res = 0;
+
+    public static int randomNumberBetween() {
+        int res = 0;
 		
 		Random randomGenerator = new Random();
 	    
@@ -22,18 +22,18 @@ public class GenericUtils {
 	    }
 	    return res;
 	}
-	
-	public int randomNumberSpecificRange(int rangeStart, int rangeEnd){
-	    int res = 0;
+
+    public static int randomNumberSpecificRange(int rangeStart, int rangeEnd) {
+        int res = 0;
 		Random random = new Random();
 	    for (int idx = 1; idx <= 10; ++idx){
 	      res = showRandomInteger(rangeStart, rangeEnd, random);
 	    }
 	    return res;
 	}
-	
-	private int showRandomInteger(int aStart, int aEnd, Random aRandom){
-		if (aStart > aEnd) {
+
+    private static int showRandomInteger(int aStart, int aEnd, Random aRandom) {
+        if (aStart > aEnd) {
 			throw new IllegalArgumentException("Start cannot exceed End.");
 		}
 

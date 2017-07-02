@@ -1,8 +1,8 @@
 package global_utils;
 
 import org.apache.commons.lang3.StringUtils;
+
 import selenium_tools.ADriverUtils;
-import selenium_tools.DriverUtils;
 
 /**
  * Created by lleir on 15/6/17.

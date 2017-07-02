@@ -1,13 +1,12 @@
 package application.coches.main.steps;
 
 import application.coches.main.validaciones.CocheValidacionesSteps;
-import application.coches.main.validaciones.CochesValidacionesProcesosAction;
 import global_utils.AbstractStepsProcess;
 
 /**
  * Created by lleir on 16/6/17.
  */
-public class CochesStepsProcess extends AbstractStepsProcess<CochesSteps, CochesValidacionesProcesosAction>{
+public class CochesStepsProcess extends AbstractStepsProcess<CochesSteps, CocheValidacionesSteps> {
 
     public void irListadoCoches() {
         steps.clickEnMenuCoches();
@@ -51,15 +50,20 @@ public class CochesStepsProcess extends AbstractStepsProcess<CochesSteps, Coches
     }
 
     private CochesSteps steps;
-    private CochesValidacionesProcesosAction validations;
+    private CocheValidacionesSteps validations;
 
+    public CochesStepsProcess() {
+        steps = new CochesSteps();
+        validations = new CocheValidacionesSteps();
+    }
+    
     @Override
     public CochesSteps getSteps() {
         return steps;
     }
 
     @Override
-    public CochesValidacionesProcesosAction getValidations() {
+    public CocheValidacionesSteps getValidations() {
         return validations;
     }
 }

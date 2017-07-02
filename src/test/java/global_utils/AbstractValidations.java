@@ -1,12 +1,14 @@
 package global_utils;
 
-import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
+import java.util.List;
+
 import org.apache.commons.codec.binary.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import selenium_tools.ABaseTestCase;
 import selenium_tools.ADriverUtils;
-import selenium_tools.DriverUtils;
 
 /**
  * Created by lleir on 25/6/17.
@@ -17,6 +19,18 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
     protected void validarCampoExistenteById(String idExpected) {
         if (!existeCampo(getDriverUtils().getByUtils().byIdContains(idExpected))) {
             error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + idExpected + "'");
+        }
+    }
+
+    protected void vlaidarCampoExistenteByClass(String classExpected) {
+        if (!existeCampo(getDriverUtils().getByUtils().byClass(classExpected))) {
+            error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + classExpected + "'");
+        }
+    }
+
+    protected void validarCampoExistenteByCss(String cssExpected) {
+        if (!existeCampo(getDriverUtils().getByUtils().byCss(cssExpected))) {
+            error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + cssExpected + "'");
         }
     }
 
@@ -70,6 +84,14 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
             error(msg +" En pantalla se mustra el literal: '"+ strPantalla + "'");
     }
 
+    protected void validarValueByCss(String css, String expected, String msg) {
+        write("Validacion de texto by CLASS");
+        validarCampoExistenteByCss(css);
+        String strPantalla = (getDriverUtils().getValueByCss(css));
+        if (!eq(strPantalla, expected))
+            error("Se esperaba el valor '" + expected + "' en el campo patron Css '" + css + "' pero se encontr�: '" + strPantalla + "'");
+    }   
+
     protected void validarTextSpanById(String id, String expected, String msg) {
         write("Validacion de texto by ID");
         validarCampoExistenteByIdContains("span", id);
@@ -93,7 +115,23 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         String attrTagPantalla = (getDriverUtils().getAtributoById(id, atributo));
         if (!eq(attrTagPantalla, expectedAttr))
             error(msg);
+    }
 
+    protected void validarOptionDisponibleEnCombo(String idCombo, String optionExpected) {
+        write("Validacion option esperada en combo");
+        Select select = new Select(getDriverUtils().findElementById(idCombo));
+        List<WebElement> options = select.getOptions();
+
+        int countok = 0;
+
+        for (WebElement o : options)
+            if (StringUtils.equals(o.getText(), optionExpected)) {
+                countok++;
+                break;
+            }
+
+        if (countok == 0)
+            error("Se esperaba la opcion '" + optionExpected + "' en la combo con ID '" + idCombo + "' pero no se encontr�.");
     }
 
     protected void writeStepOk(String msg) {

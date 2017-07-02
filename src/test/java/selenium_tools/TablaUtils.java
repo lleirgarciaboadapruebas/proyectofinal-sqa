@@ -12,8 +12,8 @@ public class TablaUtils {
 	public TablaUtils(ADriverUtils driver){
 		this.driverUtils = driver;
 	}
-	
-	public List<WebElement> getTrsTablaById(String parentId){
+
+    public List<WebElement> getTrsTablaById(String parentId){
 		return getTrsTabla(driverUtils.getByUtils().byTagnameAndIdContains("tbody", parentId));
 	}
 	

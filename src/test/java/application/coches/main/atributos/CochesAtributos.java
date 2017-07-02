@@ -8,7 +8,6 @@ import application.main.AtributosGenerales;
 public class CochesAtributos extends AtributosGenerales {
 
     // metemos atributos de pantalla coche
-
     public final String menu = "coche";
     public final String labelTitleText = "Listado de Coches";
 
@@ -17,7 +16,7 @@ public class CochesAtributos extends AtributosGenerales {
     public final String modeloClass         = "modeloClass";
     public final String kmActualesClass     = "kmActualesClass";
     public final String numBastidorClass    = "numBastidorClass";
-    public final String clienteClass        = "numBastidorClass";
+    public final String selectClienteId = "combobox1";
 
     public final String inputModeloFiltroName    = "entity.modelo";
     public final String inputMarcaFiltroName     = "entity.marca";

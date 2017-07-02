@@ -1,6 +1,5 @@
 package application.menu_top.validations;
 
-import application.clientes.main.ClienteValidacionesProcesosAction;
 import application.menu_top.atributos.MenuTopAtributos;
 import global_utils.AbstractValidations;
 
@@ -9,17 +8,6 @@ import global_utils.AbstractValidations;
  */
 public class MenuTopValidationStepsProcess extends AbstractValidations<MenuTopAtributos> {
 
-    public void validarPantallaListadoClientes(boolean isDetailed){
-
-    }
-
-    public void validarPantallaListadoFacturas(boolean isDetailed){
-
-    }
-
-    public void validarPantallaListadoCoches(boolean isDetailed){
-
-    }
 
     private MenuTopAtributos atributos;
 

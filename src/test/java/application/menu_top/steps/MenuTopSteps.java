@@ -4,7 +4,6 @@ import application.menu_top.atributos.MenuTopAtributos;
 import application.menu_top.validations.MenuTopValidationSteps;
 import global_utils.AbstractSteps;
 import selenium_tools.ADriverUtils;
-import selenium_tools.DriverUtils;
 
 /**
  * Created by lleir on 25/6/17.

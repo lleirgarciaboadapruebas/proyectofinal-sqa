@@ -1,6 +1,5 @@
 package application.menu_top.steps;
 
-import application.menu_top.validations.MenuTopValidationSteps;
 import application.menu_top.validations.MenuTopValidationStepsProcess;
 import global_utils.AbstractStepsProcess;
 
@@ -14,17 +13,17 @@ public class MenuTopStepsProcess extends AbstractStepsProcess<MenuTopSteps, Menu
 
     public void clickEnClientes(){
         steps.clickEnClientes();
-        validations.validarPantallaListadoClientes(validations.isDetailed());
+//        validations.validarPantallaListadoClientes(validations.isDetailed());
     }
 
     public void clickEnFacturas(){
         steps.clickEnFacturas();
-        validations.validarPantallaListadoFacturas(validations.isDetailed());
+//        validations.validarPantallaListadoFacturas(validations.isDetailed());
     }
 
     public void clickEnCoches(){
         steps.clickEnCoches();
-        validations.validarPantallaListadoCoches(validations.isDetailed());
+//        validations.validarPantallaListadoCoches(validations.isDetailed());
     }
 
     @Override

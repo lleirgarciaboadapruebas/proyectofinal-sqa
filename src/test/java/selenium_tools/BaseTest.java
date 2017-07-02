@@ -16,11 +16,10 @@ public class BaseTest  {
     private static final String URL = "http://192.168.1.42/tallerlavi3/";
     private static WebDriver driver;
 
-
     @Before
     public void ini(){
         ChromeOptions o = new ChromeOptions();
-        ArrayList<String> oList = new ArrayList<>();
+        ArrayList<String> oList = new ArrayList<String>();
         oList.add("--start-maximize");
         oList.add("--incognito");
         o.addArguments(oList);

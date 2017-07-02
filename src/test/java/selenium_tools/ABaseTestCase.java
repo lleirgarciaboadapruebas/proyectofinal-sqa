@@ -1,10 +1,12 @@
 package selenium_tools;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
@@ -15,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -33,22 +36,19 @@ public abstract class ABaseTestCase{
     protected StringBuffer verificationErrors = new StringBuffer();
     protected static WebDriverWait wait;
 
-    protected String detailValidationSteps = "true";
+    protected static boolean detailValidationSteps = true;
 
-    public static void setDetailValidation(String detailValidation) {
-        System.setProperty("detail.validation.step", detailValidation);
+    public static void setDetailValidation(boolean detailValidation) {
+        detailValidationSteps = detailValidation;
     }
 
     public static boolean isDetailedTest(){
-        if(getDetailValidation().equals("0"))
-            return false;
-        else
-            return true;
+        return detailValidationSteps;
     }
-
-    public static String getDetailValidation(){
-        return System.getProperty(DETAIL_VALIDATION_STEP);
-    }
+//
+//    public static boolean getDetailValidation(){
+//        return System.getProperty(DETAIL_VALIDATION_STEP);
+//    }
 
     public static String getBaseUrl(){
         return baseUrl;
@@ -89,32 +89,49 @@ public abstract class ABaseTestCase{
     }
 
 
-    @Before
-    public void setUp() throws Exception {
-        driver = loadDriver();
-        driver.manage().timeouts().implicitlyWait(TIMEOUT_SECONDS, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-        String app = getApp();
-        String baseUrl = System.getProperty("selenium.baseUrl." + app);
-        if (baseUrl != null) {
-            setBaseUrl(baseUrl);
-        }
-        String user = System.getProperty("selenium.user." + app);
-        if (user != null) {
-            setUser(user);
-        }
-        String password = System.getProperty("selenium.password." + app);
-        if (password != null) {
-            setPassword(password);
-        }
+    private static final String URL = "https://localhost/tallerlavi3";
 
-        setDetailValidation("0");
+    @Before
+    public void seleniumIni() throws Exception {
+        ChromeOptions o = new ChromeOptions();
+        System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
+        ArrayList<String> oList = new ArrayList<String>();
+        oList.add("--start-maximize");
+        oList.add("--incognito");
+        o.addArguments(oList);
+        driver = new ChromeDriver(o);
+        driver.get(URL);
+        wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
 
     }
 
+// /  @Before
+//    public void setUp() throws Exception {
+//        driver = loadDriver();
+//        driver.manage().timeouts().implicitlyWait(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+//        wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
+//        String ap 	p = getApp();
+//        String baseUrl = System.getProperty("selenium.baseUrl." + app);
+//        if (baseUrl != null) {
+//            setBaseUrl(baseUrl);
+//        }
+//        String user = System.getProperty("selenium.user." + app);
+//        if (user != null) {
+//            setUser(user);
+//        }
+//        String password = System.getProperty("selenium.password." + app);
+//        if (password != null) {
+//            setPassword(password);
+//        }
+//
+//        setDetailValidation("0");
+//
+//    }
+
     protected WebDriver loadDriver() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        String browser = System.getProperty("selenium.browser");
+//        String browser = System.getProperty("selenium.browser");
+        String browser = "chrome";
         String remoteWebDriverUrl = System.getProperty("selenium.remotewebdriver.url");
         if (BrowserType.FIREFOX.equals(browser)) {
             /** Firefox Driver **/
@@ -125,7 +142,7 @@ public abstract class ABaseTestCase{
                 System.setProperty(GECKO_DRIVER_PROPERTY, firefoxDriver.getAbsolutePath());
                 driver = new FirefoxDriver();
             }
-        } else if (BrowserType.CHROME.equals(browser)) {
+        } else if (BrowserType.CHROME.equals(browser)) { 
             /** Chrome Driver **/
             if (remoteWebDriverUrl != null) {
                 driver = new RemoteWebDriver(new URL(remoteWebDriverUrl), DesiredCapabilities.chrome());

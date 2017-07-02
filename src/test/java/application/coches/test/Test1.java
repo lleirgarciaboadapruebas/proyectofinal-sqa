@@ -1,13 +1,15 @@
 package application.coches.test;
 
-import application.clientes.main.steps.ClienteProcessSteps;
-import application.coches.main.interfaces.CocheStepInterface;
-import application.coches.main.steps.CochesStepsProcess;
-import application.coches.main.validaciones.CochesValidacionesProcesosAction;
+import java.util.Properties;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import application.clientes.main.steps.Cliente;
+import application.coches.main.Coches;
+import global_utils.GenericUtils;
 import selenium_tools.ABaseTestCase;
 
 /**
@@ -15,28 +17,38 @@ import selenium_tools.ABaseTestCase;
  */
 
 @RunWith(JUnit4.class)
-public class Test1 extends ABaseTestCase implements CocheStepInterface{
+public class Test1 extends ABaseTestCase {
 
     @Before
     public void ini(){
         setBaseUrl("192.168.1.42/tallerlavi3/");
         setTestNameClass("Test");
+        setTestNameClass("test1");
+//        System.setProperty(DETAIL_VALIDATION_STEP, "false");
+        setDetailValidation(false);
     }
 
     @Test
     public void t_ir_listado_coches() throws Exception{
-        stepsProcess.irListadoCoches();
+        Coches.process.irListadoCoches();
     }
 
+    @Test
+    public void t_crear_coche_exito() throws Exception {
+        Coches.process.crearCoche("" + GenericUtils.randomNumberSpecificRange(0, 9), "Nissan", "Almera", "200000", "4526-9545-5654-5454", "");
+
+    }
+    
     @Test public void t_validar_clientes_existentes() throws Exception {
+        String nif = GenericUtils.randomNumberSpecificRange(1, 1000) + "N";
         String nombre = "Pepe";
         String apellidos = "Rubianes";
         String complete = nombre +" "+ apellidos;
 
-        stepsProcessCliente.crearCliente("45928374-B", nombre, apellidos, "Pasage Z, nº 20", "Cardedeu", "637283942", null);
-        stepsProcess.irListadoCoches();
-        stepsProcess.getSteps().crear();
-        validations.validarClienteSeleccionableEnCreacionCoche(complete);
+        Cliente.process.crearCliente(nif, nombre, apellidos, "Pasage Z, nº 20", "Cardedeu", "637283942", "");
+        Coches.process.irListadoCoches();
+        Coches.process.getSteps().crear();
+        Coches.validaciones.validarClienteSeleccionableEnCreacionCoche(complete);
     }
 
     @Test public void t_validar_cliente_creado_existente() throws Exception{
@@ -45,16 +57,16 @@ public class Test1 extends ABaseTestCase implements CocheStepInterface{
 
     @Test public void t_validar_creacion_listado() throws Exception {
         String matricula = "2304 HPE";
-        stepsProcess.irListadoCoches();
-        stepsProcess.crearCoche(matricula,  "Mercedes", "CLK 200", "180000", "3424-5433-2345-3424", "Cliente");
-        validations.validarCreacionEnListado(matricula);
+        Coches.process.irListadoCoches();
+        Coches.process.crearCoche(matricula, "Mercedes", "CLK 200", "180000", "3424-5433-2345-3424", "Cliente");
+        Coches.validaciones.validarCreacionEnListado(matricula);
     }
 
     @Test public void t_validar_filtro_modelo(){
         String modelo = "Clio";
-        stepsProcess.irListadoCoches();
-        stepsProcess.filtrarPor(modelo, null, null, null);
-        validations.validarFiltrado(true, "Modelo", modelo);
+        Coches.process.irListadoCoches();
+        Coches.process.filtrarPor(modelo, null, null, null);
+        Coches.validaciones.validarFiltrado(true, "Modelo", modelo);
     }
 
 
@@ -84,22 +96,5 @@ public class Test1 extends ABaseTestCase implements CocheStepInterface{
     }
 
 
-    private CochesStepsProcess stepsProcess = new CochesStepsProcess();
-    private CochesValidacionesProcesosAction validations = new CochesValidacionesProcesosAction();
-    private ClienteProcessSteps stepsProcessCliente = new ClienteProcessSteps();
 
-    @Override
-    public CochesStepsProcess getStepsProcess() {
-        return stepsProcess;
-    }
-
-    @Override
-    public CochesValidacionesProcesosAction getValidationsProcess() {
-        return validations;
-    }
-
-    @Override
-    public ClienteProcessSteps getStepsProcessCliente() {
-        return stepsProcessCliente;
-    }
 }
