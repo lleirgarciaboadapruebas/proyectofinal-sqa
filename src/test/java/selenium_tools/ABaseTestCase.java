@@ -107,8 +107,9 @@ public abstract class ABaseTestCase{
     @Before
     public void seleniumRemoteHubWebDriver() {
     	DesiredCapabilities capability = DesiredCapabilities.chrome();
-    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/drivers/chromedriver.exe");
-    	capability.setBrowserName("chrome");
+//    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
+        System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
+        capability.setBrowserName("chrome");
     	capability.setPlatform(Platform.MAC);
     	
     	WebDriver driver = null;
