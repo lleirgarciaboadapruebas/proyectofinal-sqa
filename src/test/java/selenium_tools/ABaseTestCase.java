@@ -89,7 +89,8 @@ public abstract class ABaseTestCase{
     }
 
 
-    private static final String URL = "https://localhost/tallerlavi3";
+    private static final String URL1 = "https://localhost/tallerlavi3";
+    private static final String URL = "https://192.168.1.42/tallerlavi3";
 
 //    @Before
 //    public void seleniumIni() throws Exception {
@@ -108,17 +109,19 @@ public abstract class ABaseTestCase{
     public void seleniumRemoteHubWebDriver() {
     	DesiredCapabilities capability = DesiredCapabilities.chrome();
 //    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
-        System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
+//      System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
         capability.setBrowserName("chrome");
     	capability.setPlatform(Platform.MAC);
     	
-    	WebDriver driver = null;
+    	driver = null;
     	try {
 			driver = new RemoteWebDriver(new URL("http://192.168.1.33:5566/wd/hub"), capability);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
+    	driver.get(URL);
     }
 
 // /  @Before
