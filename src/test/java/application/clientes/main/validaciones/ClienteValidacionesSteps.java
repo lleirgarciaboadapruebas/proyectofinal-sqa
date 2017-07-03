@@ -129,21 +129,10 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
 
     public void validarclienteInexistenteEnListado(String nombre, String apellidos, String telefono, boolean isDetailed) {
         if (isDetailed) {
-            List<WebElement> trs = getDriverUtils().findElementsByCss(atributos.selectorTabla);
 
-            for (WebElement tr : trs) {
-                String td_nombre = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(1)"));
-                String td_apellidos = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(2)"));
-                String td_telefono = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(4)"));
-
-                boolean nombreok = StringUtils.equals(td_nombre, nombre);
-                boolean apellidosok = StringUtils.equals(td_apellidos, apellidos);
-                boolean telefonook = StringUtils.equals(td_telefono, telefono);
-
-                if (nombreok && apellidosok && telefonook)
-                    getDriverUtils().clickWebELement(tr, getDriverUtils().getByUtils().byCss(atributos.selectorEliminar));
-
-            }
+            WebElement tr = getDriverUtils().devolverWebElement(atributos.selectorTabla, "td:nth-child(1)", "td:nth-child(2)", "td_nth-child(3)", nombre, apellidos, telefono);
+            if (tr == null)
+                error("No se ha encontrado el Cliente con Nombre y Apellidos '" + nombre + " " + apellidos + "' y Telefono '" + telefono + "'");
         }
     }
 }

@@ -1,5 +1,7 @@
 package application.coches.test;
 
+import application.coches.main.Coches;
+import global_utils.GenericUtils;
 import org.junit.Before;
 import org.junit.Test;
 import selenium_tools.ABaseTestCase;
@@ -22,12 +24,20 @@ public class TestCoches extends ABaseTestCase {
 
     @Test
     public void validarPantallaListadoCoches() throws Exception {
-
+        Coches.process.irListadoCoches();
+        Coches.validaciones.validarPantallaListado(true);
     }
 
     @Test
     public void validarCreacionCocheEnListado() throws Exception {
+        String matricula = GenericUtils.randomString(10);
+        String marca = GenericUtils.randomString(10);
+        String modelo = GenericUtils.randomString(10);
 
+
+        Coches.process.crearCoche(matricula, marca, modelo, "200000", "1283-2392-3829-3243", "ALBA FARRES JUBANY");
+        Coches.steps.clickEnMenuCoches();
+        Coches.validaciones.validarCocheEnListado(matricula, marca, true);
     }
 
     @Test

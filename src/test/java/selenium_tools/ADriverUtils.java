@@ -1,6 +1,7 @@
 package selenium_tools;
 
 import global_utils.GenericUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -501,6 +502,28 @@ public class ADriverUtils {
 
 
     /** **************************************************************************************** Super utils. */
+
+    public WebElement devolverWebElement(String listSelector, String td1, String td2, String td3, String expect1, String expect2, String expect3) {
+        // cojo elementos segun selector css
+        List<WebElement> trs = findElementsByCss(listSelector);
+
+        // recorro 
+        for (WebElement tr : trs) {
+            String it1 = getTextoByWebElement(tr, getByUtils().byCss(td1));
+            String it2 = getTextoByWebElement(tr, getByUtils().byCss(td2));
+            String it3 = getTextoByWebElement(tr, getByUtils().byCss(td3));
+
+            boolean ok1 = StringUtils.equals(it1, expect1);
+            boolean ok2 = StringUtils.equals(it2, expect2);
+            boolean ok3 = StringUtils.equals(it3, expect3);
+
+            if (ok1 && ok2 && ok3)
+                return tr;
+        }
+
+        return null;
+    }
+    
 
     // TODO
     public void localizarElementoEnTablaScroll(String texto, String parentSelector, String fieldSelector){

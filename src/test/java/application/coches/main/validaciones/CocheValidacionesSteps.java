@@ -164,4 +164,8 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
     protected CochesAtributos getAtributos() {
         return atributos;
     }
+
+    public void validarCocheEnListado(String matricula, String marca, boolean isDetailed) {
+
+    }
 }
