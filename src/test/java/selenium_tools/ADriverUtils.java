@@ -110,6 +110,10 @@ public class ADriverUtils {
         return ABaseTestCase.getWebDriverWait().until(ExpectedConditions.elementToBeClickable(webelement)).findElement(by);
     }
 
+    public WebElement findElementByCss(WebElement webelement, String css) {
+        return ABaseTestCase.getWebDriverWait().until(ExpectedConditions.elementToBeClickable(webelement)).findElement(getByUtils().byCss(css));
+    }
+
     /** Busca un elemento segun etiqueta y atributo  id. */
     public WebElement findElementById(String tagname, String id){
         return findElement(byUtils.byTagnameAndId(tagname, id));
@@ -212,6 +216,10 @@ public class ADriverUtils {
 
     public void clickWebElement(WebElement e){
         e.click();
+    }
+
+    public void clickWebELement(WebElement e, By by) {
+        e.findElement(by);
     }
 
     private static void click(By by){

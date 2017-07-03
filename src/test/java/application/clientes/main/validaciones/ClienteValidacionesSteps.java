@@ -2,11 +2,35 @@ package application.clientes.main.validaciones;
 
 import application.clientes.main.atributos.ClienteAtributos;
 import global_utils.AbstractValidations;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Created by lleir on 15/6/17.
  */
 public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtributos>{
+
+
+    public void validarClienteEnListado(String nombre, String apellidos, String telefono) {
+        List<WebElement> trs = getDriverUtils().findElementsByCss(atributos.selectorTabla);
+
+        for (WebElement tr : trs) {
+            String td_nombre = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(1)"));
+            String td_apellidos = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(2)"));
+            String td_telefono = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(4)"));
+
+            boolean nombreok = StringUtils.equals(td_nombre, nombre);
+            boolean apellidosok = StringUtils.equals(td_apellidos, apellidos);
+            boolean telefonook = StringUtils.equals(td_telefono, telefono);
+
+            if (nombreok && apellidosok && telefonook)
+                getDriverUtils().clickWebELement(tr, getDriverUtils().getByUtils().byCss(atributos.selectorEliminar));
+
+        }
+    }
+
 
     public void validarPantallaCreacion(boolean isDetailed) {
         validarCampoExistenteNif(isDetailed);
@@ -19,7 +43,36 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
     }
 
     public void validarPantallaListado(boolean isDetailed) {
+        validarCampoExistenteTabla(isDetailed);
+        validarCampoExistenteFiltroNombre(isDetailed);
+        validarCampoExistenteFiltroApellido(isDetailed);
+        validarCampoExistenteFiltroTelefono(isDetailed);
+        validarCampoExistenteFiltroNif(isDetailed);
+    }
 
+    private void validarCampoExistenteTabla(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteByClass(atributos.tablaClass);
+    }
+
+    private void validarCampoExistenteFiltroNombre(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteById(atributos.nombreFiltro);
+    }
+
+    private void validarCampoExistenteFiltroApellido(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteById(atributos.apellidoFiltro);
+    }
+
+    private void validarCampoExistenteFiltroTelefono(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteById(atributos.telefonoFiltro);
+    }
+
+    private void validarCampoExistenteFiltroNif(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteById(atributos.nifFiltro);
     }
 
     public void validarCampoExistenteNif(boolean isDetailed) {
@@ -72,5 +125,25 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
     @Override
     protected ClienteAtributos getAtributos() {
         return atributos;
+    }
+
+    public void validarclienteInexistenteEnListado(String nombre, String apellidos, String telefono, boolean isDetailed) {
+        if (isDetailed) {
+            List<WebElement> trs = getDriverUtils().findElementsByCss(atributos.selectorTabla);
+
+            for (WebElement tr : trs) {
+                String td_nombre = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(1)"));
+                String td_apellidos = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(2)"));
+                String td_telefono = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(4)"));
+
+                boolean nombreok = StringUtils.equals(td_nombre, nombre);
+                boolean apellidosok = StringUtils.equals(td_apellidos, apellidos);
+                boolean telefonook = StringUtils.equals(td_telefono, telefono);
+
+                if (nombreok && apellidosok && telefonook)
+                    getDriverUtils().clickWebELement(tr, getDriverUtils().getByUtils().byCss(atributos.selectorEliminar));
+
+            }
+        }
     }
 }

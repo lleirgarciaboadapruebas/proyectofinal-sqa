@@ -1,5 +1,7 @@
-package application.clientes.main.steps;
+package application.clientes.main;
 
+import application.clientes.main.steps.ClienteProcess;
+import application.clientes.main.steps.ClienteSteps;
 import application.clientes.main.validaciones.ClienteValidacionesSteps;
 
 public class Cliente {

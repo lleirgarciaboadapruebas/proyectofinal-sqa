@@ -1,13 +1,11 @@
 package application.coches.test;
 
-import java.util.Properties;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import application.clientes.main.steps.Cliente;
+import application.clientes.main.Cliente;
 import application.coches.main.Coches;
 import global_utils.GenericUtils;
 import selenium_tools.ABaseTestCase;
@@ -31,6 +29,28 @@ public class Test1 extends ABaseTestCase {
     @Test
     public void t_ir_listado_coches() throws Exception{
         Coches.process.irListadoCoches();
+    }
+
+    @Test
+    public void t_validar_pantalla_creacion_coche() throws Exception {
+        Coches.process.irListadoCoches();
+        Coches.steps.crear();
+        Coches.validaciones.validarPantallaCreacion(true);
+    }
+
+    @Test
+    public void t_validar_pantalla_vista_coche() throws Exception {
+        Coches.process.irListadoCoches();
+        Coches.steps.editarEnListado("matriculaexistente");
+        Coches.validaciones.validarPantallaVista(true);
+    }
+
+    @Test
+    public void t_validar_pantalla_edicion_coche() throws Exception {
+        Coches.process.irListadoCoches();
+        Coches.steps.editarEnListado("matriculaexistente");
+        Coches.steps.editarDatos();
+        Coches.validaciones.validarPantallaModificacion(true);
     }
 
     @Test

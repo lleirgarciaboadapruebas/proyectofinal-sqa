@@ -24,18 +24,21 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
         validarCampoExistenteMarca(isDetailed);
         validarCampoExistenteKmActuales(isDetailed);
         validarCampoExistenteCliente(isDetailed);
+
+        // validar inputs
     }
 
     /**
      * valida campos existentes en pantalla vista de un coche.
      */
     public void validarPantallaVista(boolean isDetailed) {
-
+        if (isDetailed)
+            validarPantallaCreacion(isDetailed);
     }
 
     public void validarPantallaModificacion(boolean isDetailed) {
-
-
+        if (isDetailed)
+            validarPantallaCreacion(isDetailed);
     }
 
     public void validarExistenciaButtonCrearCoche(boolean isDetailed) {

@@ -5,7 +5,12 @@ import application.coches.main.validaciones.CocheValidacionesSteps;
 import application.menu_top.steps.MenuTopSteps;
 import global_utils.AbstractStepsAndNavigation;
 import global_utils.interfaces.GeneralStepsInterface;
+import org.apache.commons.codec.binary.StringUtils;
+import org.openqa.selenium.WebElement;
 import selenium_tools.ADriverUtils;
+import sun.swing.StringUIClientPropertyKey;
+
+import java.util.List;
 
 /**
  *  @author Lleir Garcia -- lleirgarica@gmail.com
@@ -29,7 +34,7 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
     public void volver() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonVolverAtras(validations.isDetailed());
-        driver.clickButtonById(atributos.btnVolverId);
+        driver.clickByCss(atributos.btnVolverId);
         validations.validarPantallaCreacion(validations.isDetailed());
     }
 
@@ -80,11 +85,16 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
         driver.clickButtonById(atributos.btnCrearId);
     }
 
-    public void editarEnListado(String id) {
+    public void editarEnListado(String matricula) {
         driver.writeStep(driver.getNameMethod());
-        validations.validarExistenciaButtonCrearCoche(validations.isDetailed());
-        driver.clickButtonById(atributos.btnCrearId);
-        validations.validarPantallaCreacion(validations.isDetailed());
+        List<WebElement> trs = driver.findElementsByCss(atributos.selectorTableListado);
+        WebElement linkEdicion = null;
+        for (WebElement tr : trs)
+            if (StringUtils.equals(tr.getText(), matricula))
+                linkEdicion = driver.findElementByCss(tr, atributos.selectorTableEdition);
+
+        driver.clickWebElement(linkEdicion);
+        validations.validarPantallaVista(validations.isDetailed());
     }
 
     public void eliminar(String id) {

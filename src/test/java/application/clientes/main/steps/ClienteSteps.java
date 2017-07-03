@@ -5,7 +5,11 @@ import application.clientes.main.validaciones.ClienteValidacionesSteps;
 import application.main.AbstractSteps;
 import application.menu_top.steps.Menu;
 import global_utils.interfaces.GeneralStepsInterface;
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.WebElement;
 import selenium_tools.ADriverUtils;
+
+import java.util.List;
 
 /**
  * Created by lleir on 16/6/17.
@@ -41,6 +45,7 @@ public class ClienteSteps extends AbstractSteps<ClienteAtributos, ClienteValidac
 
     }
 
+
     public void guardarDatos() {
         driver.writeStep(driver.getNameMethod());
         driver.clickById(atributos.btnGuardarId);
@@ -57,8 +62,31 @@ public class ClienteSteps extends AbstractSteps<ClienteAtributos, ClienteValidac
 
     }
 
+    @Override
     public void eliminar(String id) {
-        // TODO Auto-generated method stub
+
+    }
+
+
+    public void eliminar(String nombre, String apellido, String numeroTelefono) {
+        List<WebElement> trs = driver.findElementsByCss(atributos.selectorTabla);
+
+        for (WebElement tr : trs) {
+            String td_nombre = driver.getTextoByWebElement(tr, driver.getByUtils().byCss("td:nth-child(1)"));
+            String td_apellidos = driver.getTextoByWebElement(tr, driver.getByUtils().byCss("td:nth-child(2)"));
+            String td_telefono = driver.getTextoByWebElement(tr, driver.getByUtils().byCss("td:nth-child(4)"));
+
+            boolean nombreok = StringUtils.equals(td_nombre, nombre);
+            boolean apellidosok = StringUtils.equals(td_apellidos, apellido);
+            boolean telefonook = StringUtils.equals(td_telefono, numeroTelefono);
+
+            if (nombreok && apellidosok && telefonook)
+                driver.clickWebELement(tr, driver.getByUtils().byCss(atributos.selectorEliminar));
+
+        }
+
+        // alert (aceptar!)
+
 
     }
 
