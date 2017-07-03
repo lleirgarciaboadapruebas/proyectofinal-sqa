@@ -1,11 +1,9 @@
 package application.clientes.main.validaciones;
 
-import application.clientes.main.atributos.ClienteAtributos;
-import global_utils.AbstractValidations;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
+import application.clientes.main.atributos.ClienteAtributos;
+import global_utils.AbstractValidations;
 
 /**
  * Created by lleir on 15/6/17.
@@ -14,23 +12,14 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
 
 
     public void validarClienteEnListado(String nombre, String apellidos, String telefono) {
-        List<WebElement> trs = getDriverUtils().findElementsByCss(atributos.selectorTabla);
-
-        for (WebElement tr : trs) {
-            String td_nombre = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(1)"));
-            String td_apellidos = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(2)"));
-            String td_telefono = getDriverUtils().getTextoByWebElement(tr, getDriverUtils().getByUtils().byCss("td:nth-child(4)"));
-
-            boolean nombreok = StringUtils.equals(td_nombre, nombre);
-            boolean apellidosok = StringUtils.equals(td_apellidos, apellidos);
-            boolean telefonook = StringUtils.equals(td_telefono, telefono);
-
-            if (nombreok && apellidosok && telefonook)
-                getDriverUtils().clickWebELement(tr, getDriverUtils().getByUtils().byCss(atributos.selectorEliminar));
-
+        if(isDetailed()){
+        	WebElement tr_expected = getDriverUtils().devolverWebElement(atributos.selectorTabla, 
+        			"td:nth-child(1)", "td:nth-child(2)", "td:nth-child(4)", nombre, apellidos, telefono);
+        	
+        	if(tr_expected == null)
+        		error("No se ha encontrado el Cliente '"+ nombre +" "+ apellidos +"' con el telefono '"+ telefono +"' en el listado de clientes.");
         }
     }
-
 
     public void validarPantallaCreacion(boolean isDetailed) {
         validarCampoExistenteNif(isDetailed);

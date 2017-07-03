@@ -1,9 +1,17 @@
 package selenium_tools;
 
-import org.apache.commons.codec.binary.StringUtils;
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,14 +22,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.Assert.fail;
 
 /**
  * Created by lleir on 25/6/17.
@@ -91,18 +91,33 @@ public abstract class ABaseTestCase{
 
     private static final String URL = "https://localhost/tallerlavi3";
 
+//    @Before
+//    public void seleniumIni() throws Exception {
+//        ChromeOptions o = new ChromeOptions();
+//        System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
+//        ArrayList<String> oList = new ArrayList<String>();
+//        oList.add("--start-maximize");
+//        oList.add("--incognito");
+//        o.addArguments(oList);
+//        driver = new ChromeDriver(o);
+//        driver.get(URL);
+//        wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
+//
+//    }
     @Before
-    public void seleniumIni() throws Exception {
-        ChromeOptions o = new ChromeOptions();
-        System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
-        ArrayList<String> oList = new ArrayList<String>();
-        oList.add("--start-maximize");
-        oList.add("--incognito");
-        o.addArguments(oList);
-        driver = new ChromeDriver(o);
-        driver.get(URL);
-        wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-
+    public void seleniumRemoteHubWebDriver() {
+    	DesiredCapabilities capability = DesiredCapabilities.chrome();
+    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
+    	capability.setBrowserName("chrome");
+    	capability.setPlatform(Platform.MAC);
+    	
+    	WebDriver driver = null;
+    	try {
+			driver = new RemoteWebDriver(new URL("http://192.168.1.33:5566/wd/hub"), capability);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 // /  @Before
