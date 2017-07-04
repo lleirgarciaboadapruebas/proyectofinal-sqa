@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import selenium_tools.ABaseTestCase;
 import selenium_tools.ADriverUtils;
+import selenium_tools.AlmacenSteps;
+import selenium_tools.ScreenshotsUtils;
 
 /**
  * Created by lleir on 25/6/17.
@@ -166,6 +168,14 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
     }
 
     protected void error(String msg) {
+    	AlmacenSteps.mostrarSteps();
+    	ScreenshotsUtils s = new ScreenshotsUtils();
+    	try {
+			s.takeScreenShot();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         throwExceptionClass(ABaseTestCase.testClassName, msg, 1);
     }
 

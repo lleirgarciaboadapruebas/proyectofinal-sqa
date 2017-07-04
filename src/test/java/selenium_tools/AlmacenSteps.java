@@ -22,7 +22,7 @@ public class AlmacenSteps {
     }
 
     public static void mostrarSteps() {
-//		map.forEach((k,v) -> System.out.println(k + ": " + v));
+		map.forEach((k,v) -> System.out.println(k + ": " + v));
     }
 
     public static void mostrarProcesos() {

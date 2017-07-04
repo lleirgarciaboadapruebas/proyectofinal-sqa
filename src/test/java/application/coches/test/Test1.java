@@ -90,20 +90,6 @@ public class Test1 extends ABaseTestCase {
     }
 
 
-    @Override
-    public void setBaseUrl(String url) {
-        baseUrl = url;
-    }
-
-    @Override
-    public void setUser(String userr) {
-        user = userr;
-    }
-
-    @Override
-    public void setPassword(String passwordd) {
-        password = passwordd;
-    }
 
     @Override
     public String getApp() {
@@ -111,9 +97,20 @@ public class Test1 extends ABaseTestCase {
     }
 
     @Override
-    public void setTestNameClass(String testNameClass) {
-        testClassName = testNameClass;
+    public void setTestNameClass(String testNameClasss) {
+    	testClassName = testNameClasss;
     }
+
+	@Override
+	public void setTestCaseName(String testCaseNamee) {
+		testCaseName = testCaseNamee;
+	}
+
+	@Override
+	public void setBaseUrl(String baseUrll) {
+		baseUrl = baseUrll;
+		
+	}
 
 
 

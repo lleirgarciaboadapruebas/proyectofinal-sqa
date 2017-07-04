@@ -74,6 +74,7 @@ public abstract class ABaseTestCase{
 
     protected final String SCREENSHOTS_DIR = "screenshots/";
     protected final String DRIVER_DIR = "drivers/";
+    protected final String SELENIUM_SCREENSHOTS = "selenium.screenshot.dir";
     protected final String IE_DRIVER_PROPERTY = "webdriver.ie.driver";
     protected final String IE_DRIVER_NAME = "IEDriverServer.exe";
     protected final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
@@ -128,6 +129,8 @@ public abstract class ABaseTestCase{
 		}
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
     	driver.get(URL);
+    	
+    	System.setProperty(SELENIUM_SCREENSHOTS, "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/screenshots");
     }
 
 // /  @Before
@@ -221,11 +224,11 @@ public abstract class ABaseTestCase{
 
     @After
     public void tearDown() throws Exception {
-        // Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");
-        // Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
-        // Thread.sleep(1000);
-        // Runtime.getRuntime().exec("taskkill /F /IM WerFault.exe");
-//		driver.quit();
+         Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");
+         Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
+         Thread.sleep(1000);
+         Runtime.getRuntime().exec("taskkill /F /IM WerFault.exe");
+		driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
@@ -275,12 +278,10 @@ public abstract class ABaseTestCase{
 
     public abstract void setBaseUrl(String baseUrl);
 
-    public abstract void setUser(String userr);
-
-    public abstract void setPassword(String passwordd);
-
     public abstract String getApp();
 
     public abstract void setTestNameClass(String testNameClass);
+    
+    public abstract void setTestCaseName(String testCaseName);
 
 }

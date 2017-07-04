@@ -15,20 +15,21 @@ public class TestCliente extends ABaseTestCase {
     @Before
     public void ini() {
         setBaseUrl("192.168.1.42/tallerlavi3/");
-        setTestNameClass("Test");
-        setTestNameClass("test1");
+        setTestNameClass(this.getClass().getName());
 //        System.setProperty(DETAIL_VALIDATION_STEP, "false");
         setDetailValidation(false);
     }
 
     @Test
     public void validarPantallaListadoCliente() throws Exception {
+    	setTestCaseName(getNameTest());
         Cliente.steps.clickEnClientes();
         Cliente.validaciones.validarPantallaListado(true);
     }
 
     @Test
     public void validarCreacionClienteEnListado() throws Exception {
+    	setTestCaseName(getNameTest());
         String nif = Integer.toString(GenericUtils.randomNumberSpecificRange(0, 10));
         Cliente.process.crearCliente(nif, "Pepito", "Sousa", "C/ Sin numero", "Cardedeu", "653847238", "");
         Cliente.steps.clickEnClientes();
@@ -38,6 +39,7 @@ public class TestCliente extends ABaseTestCase {
 
     @Test
     public void validarClienteDisponibleEnCreacionCoche() throws Exception {
+    	setTestCaseName(getNameTest()); 
         String nif = Integer.toString(GenericUtils.randomNumberSpecificRange(0, 10));
         Cliente.process.crearCliente(nif, "Lourdes", "Martinez", "C/ Sin numero", "Cardedeu", "653847238", "");
         Coches.steps.clickEnMenuCoches();
@@ -55,27 +57,22 @@ public class TestCliente extends ABaseTestCase {
 
 
     @Override
-    public void setBaseUrl(String baseUrl) {
-
-    }
-
-    @Override
-    public void setUser(String userr) {
-
-    }
-
-    @Override
-    public void setPassword(String passwordd) {
-
+    public void setBaseUrl(String baseUrll) {
+    	baseUrl = baseUrll;
     }
 
     @Override
     public String getApp() {
-        return null;
+        return app;
     }
 
     @Override
-    public void setTestNameClass(String testNameClass) {
-
+    public void setTestNameClass(String testNameClasss) {
+    	testClassName = testNameClasss;
     }
+
+	@Override
+	public void setTestCaseName(String testCaseNamee) {
+		testCaseName = testCaseNamee;
+	}
 }

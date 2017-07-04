@@ -63,28 +63,27 @@ public class TestCoches extends ABaseTestCase {
     }
 
 
-    @Override
-    public void setBaseUrl(String baseUrl) {
-
-    }
-
-    @Override
-    public void setUser(String userr) {
-
-    }
-
-    @Override
-    public void setPassword(String passwordd) {
-
-    }
 
     @Override
     public String getApp() {
-        return null;
+        return app;
     }
 
     @Override
-    public void setTestNameClass(String testNameClass) {
-
+    public void setTestNameClass(String testNameClasss) {
+    	testClassName = testNameClasss;
     }
+
+	@Override
+	public void setTestCaseName(String testCaseNamee) {
+		testCaseName = testCaseNamee;
+	}
+
+
+	@Override
+	public void setBaseUrl(String baseUrll) {
+		baseUrl = baseUrll;
+	}
+	
+	
 }
