@@ -475,6 +475,12 @@ public class ADriverUtils {
 
     public void writeStep(String log){
         writeLog("Step ---- "+ log);
+        AlmacenSteps.putStep("step", log);
+    }
+
+    public void writeStepValidation(String log) {
+        writeLog("Validation ---- " + log);
+        AlmacenSteps.putStep("validacion", log);
     }
 
     public void writeStepProces(String log){

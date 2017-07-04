@@ -72,6 +72,7 @@ public abstract class ABaseTestCase{
 
     protected final int TIMEOUT_SECONDS = 10;
 
+    protected final String SCREENSHOTS_DIR = "screenshots/";
     protected final String DRIVER_DIR = "drivers/";
     protected final String IE_DRIVER_PROPERTY = "webdriver.ie.driver";
     protected final String IE_DRIVER_NAME = "IEDriverServer.exe";
@@ -83,9 +84,14 @@ public abstract class ABaseTestCase{
     protected String strinit = "Init Test: ";
     protected String strfinish = "OK Finish Test: ";
     public static String testClassName;
+    public static String testCaseName;
 
     public static String getTestClassName(){
         return testClassName;
+    }
+
+    public static String getTestCaseName() {
+        return testCaseName;
     }
 
 

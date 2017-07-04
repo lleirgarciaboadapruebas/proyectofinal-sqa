@@ -17,33 +17,43 @@ import selenium_tools.ADriverUtils;
 public abstract class AbstractValidations<AtributosPantalla> extends AbstractBaseUtils<AtributosPantalla> {
 
     protected void validarCampoExistenteById(String idExpected) {
-        if (!existeCampo(getDriverUtils().getByUtils().byIdContains(idExpected))) {
+        if (!existeCampo(getDriverUtils().getByUtils().byIdContains(idExpected)))
             error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + idExpected + "'");
-        }
+        else
+            getDriverUtils().writeStepValidation("Campo existente con ID: '" + idExpected + "'.");
+
     }
 
     protected void vlaidarCampoExistenteByClass(String classExpected) {
-        if (!existeCampo(getDriverUtils().getByUtils().byClass(classExpected))) {
+        if (!existeCampo(getDriverUtils().getByUtils().byClass(classExpected)))
             error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + classExpected + "'");
-        }
+        else
+            getDriverUtils().writeStepValidation("Campo existente con CLASS: '" + classExpected + "'.");
+
     }
 
     protected void validarCampoExistenteByCss(String cssExpected) {
-        if (!existeCampo(getDriverUtils().getByUtils().byCss(cssExpected))) {
+        if (!existeCampo(getDriverUtils().getByUtils().byCss(cssExpected)))
             error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + cssExpected + "'");
-        }
+        else
+            getDriverUtils().writeStepValidation("Campo existente segun patron css: '" + cssExpected + ".'");
+
     }
 
     protected void validarCampoExistenteByIdContains(String tagname, String idExpected) {
-        if (!existeCampo(getDriverUtils().getByUtils().byTagnameAndIdContains(tagname, idExpected))) {
+        if (!existeCampo(getDriverUtils().getByUtils().byTagnameAndIdContains(tagname, idExpected)))
             error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + idExpected + "'");
-        }
+        else
+            getDriverUtils().writeStepValidation("Campo existente segun ID contains: '" + idExpected + "'.");
+
     }
 
     protected void validarCampoExistenteByClass(String classExpected) {
-        if (!existeCampo(getDriverUtils().getByUtils().byClass(classExpected))) {
+        if (!existeCampo(getDriverUtils().getByUtils().byClass(classExpected)))
             error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + classExpected + "'");
-        }
+        else
+            getDriverUtils().writeStepValidation("Campo existente con CLASS: '" + classExpected + "'.");
+
     }
 
     protected boolean esVisible(By by) {
@@ -68,11 +78,13 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
     }
 
     protected void validarTextoById(String id, String expected) {
-        write("Validacion de texto by ID");
+
         validarCampoExistenteById(id);
         String strPantalla = (getDriverUtils().getInputValueByContainsId(id));        //.isEmpty() ? getTextoByContainsId(id) : getTextoById(id));
         if (!eq(strPantalla, expected))
             error("Se esperaba el texto '"+ expected + "' pero se encontró '"+ strPantalla + "'");
+        else
+            getDriverUtils().writeStepValidation("Texto buscado por ID '" + expected + "' esperado validado.");
 
     }
 
@@ -82,6 +94,8 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         String strPantalla = (getDriverUtils().getTextoByClass(clas));
         if (!eq(strPantalla, expected))
             error(msg +" En pantalla se mustra el literal: '"+ strPantalla + "'");
+        else
+            getDriverUtils().writeStepValidation("Texto  buscado por CLASS '" + expected + "' esperado validado.");
     }
 
     protected void validarValueByCss(String css, String expected, String msg) {
@@ -90,6 +104,8 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         String strPantalla = (getDriverUtils().getValueByCss(css));
         if (!eq(strPantalla, expected))
             error("Se esperaba el valor '" + expected + "' en el campo patron Css '" + css + "' pero se encontr�: '" + strPantalla + "'");
+        else
+            getDriverUtils().writeStepValidation("Value de INPUT buscado por CSS '" + expected + "' esperado validado.");
     }   
 
     protected void validarTextSpanById(String id, String expected, String msg) {
@@ -98,7 +114,8 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         String strPantalla = (getDriverUtils().getSpanTextValueByContainsId(id));        //.isEmpty() ? getValueByContainsId(id) : getValueById(id));
         if (!eq(strPantalla, expected))
             error(msg);
-
+        else
+            getDriverUtils().writeStepValidation("Texto de SPAN buscado por ID '" + expected + "' esperado validado.");
     }
 
     protected void validarValueInputById(String id, String expected, String msg) {
@@ -107,6 +124,8 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         String strPantalla = (getDriverUtils().getInputValueByContainsId(id));        //.isEmpty() ? getValueByContainsId(id) : getValueById(id));
         if (!eq(strPantalla, expected))
             error(msg);
+        else
+            getDriverUtils().writeStepValidation("Value de INPUT buscado por ID '" + expected + "' esperado validado.");
 
     }
 
@@ -115,6 +134,8 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         String attrTagPantalla = (getDriverUtils().getAtributoById(id, atributo));
         if (!eq(attrTagPantalla, expectedAttr))
             error(msg);
+        else
+            getDriverUtils().writeStepValidation("Atributo buscado por ID '" + expectedAttr + "' esperado validado.");
     }
 
     protected void validarOptionDisponibleEnCombo(String idCombo, String optionExpected) {
@@ -132,6 +153,8 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
 
         if (countok == 0)
             error("Se esperaba la opcion '" + optionExpected + "' en la combo con ID '" + idCombo + "' pero no se encontr�.");
+        else
+            getDriverUtils().writeStepValidation("Option esperada en elemento ID:'" + idCombo + "' con valor: '" + optionExpected + "' esperado validado.");
     }
 
     protected void writeStepOk(String msg) {

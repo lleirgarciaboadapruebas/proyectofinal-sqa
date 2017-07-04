@@ -1,5 +1,6 @@
 package application.coches.test;
 
+import application.clientes.main.Cliente;
 import application.coches.main.Coches;
 import global_utils.GenericUtils;
 import org.junit.Before;
@@ -42,6 +43,17 @@ public class TestCoches extends ABaseTestCase {
 
     @Test
     public void validarCocheDisponibleEnCreacionFactura() throws Exception {
+        String matricula = GenericUtils.randomString(10);
+        String marca = GenericUtils.randomString(10);
+        String modelo = GenericUtils.randomString(10);
+        String nif = GenericUtils.randomString(8) + "N";
+        String nombre = GenericUtils.randomString(7);
+        String apellidos = GenericUtils.randomString(8);
+        String telefono = Integer.toString(GenericUtils.randomNumberSpecificRange(12, 23));
+
+
+        Coches.process.crearCoche(matricula, marca, modelo, "200000", "1283-2392-3829-3243", "ALBA FARRES JUBANY");
+        Cliente.process.crearCliente(nif, nombre, apellidos, "Psg/ la garza 10", "Cardedeu", telefono, "");
 
     }
 
