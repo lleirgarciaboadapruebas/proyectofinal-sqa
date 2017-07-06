@@ -1,6 +1,6 @@
-package application.facturas.validaciones;
+package application.facturas.main.validaciones;
 
-import application.facturas.atributos.FacturasAtributos;
+import application.facturas.main.atributos.FacturasAtributos;
 import global_utils.AbstractValidations;
 
 /**
@@ -10,6 +10,13 @@ public class FacturasValidacionesSteps extends AbstractValidations<FacturasAtrib
 
     public void validarPantallaListado(boolean isDetailed) {
 
+    }
+
+    public void validarFacturaExistenteEnListado(String codigo, boolean isDetailed) {
+        if (isDetailed) {
+
+
+        }
     }
 
     public void validarExistenciaButtonCrearFactura(boolean isDetailed) {

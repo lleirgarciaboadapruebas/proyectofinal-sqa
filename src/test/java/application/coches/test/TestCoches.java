@@ -16,9 +16,7 @@ public class TestCoches extends ABaseTestCase {
     @Before
     public void ini() {
         setBaseUrl("192.168.1.42/tallerlavi3/");
-        setTestNameClass("Test");
-        setTestNameClass("test1");
-//        System.setProperty(DETAIL_VALIDATION_STEP, "false");
+        setTestNameClass(this.getClass().getName());
         setDetailValidation(false);
     }
 
@@ -63,6 +61,20 @@ public class TestCoches extends ABaseTestCase {
     }
 
 
+    @Override
+    public void setBaseUrl(String baseUrll) {
+        baseUrl = baseUrll;
+    }
+
+    @Override
+    public void setUser(String userr) {
+        user = userr;
+    }
+
+    @Override
+    public void setPassword(String passwordd) {
+        password = passwordd;
+    }
 
     @Override
     public String getApp() {
@@ -70,20 +82,7 @@ public class TestCoches extends ABaseTestCase {
     }
 
     @Override
-    public void setTestNameClass(String testNameClasss) {
-    	testClassName = testNameClasss;
+    public void setTestNameClass(String testNameClass) {
+        testClassName = testNameClass;
     }
-
-	@Override
-	public void setTestCaseName(String testCaseNamee) {
-		testCaseName = testCaseNamee;
-	}
-
-
-	@Override
-	public void setBaseUrl(String baseUrll) {
-		baseUrl = baseUrll;
-	}
-	
-	
 }
