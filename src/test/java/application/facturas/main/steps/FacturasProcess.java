@@ -31,7 +31,7 @@ public class FacturasProcess extends AbstractStepsProcess<FacturasSteps, Factura
         irListadoFacturas();
         escribirDatosGeneralesFactura(cliente, codigo, fecha, estado, iva, precio_hora, coche);
         escribirDatosGeneralesConcepto(tipoConcepto, descripcionConcepto, cantidadHorasConcepto, precioConcepto);
-        steps.clickEnButtonAñadirConcepto();
+        steps.clickEnButtonAnadirConcepto();
     }
 
     public void editarDatosPrincipalesDeFactura(String codigo, String nuevoCodigo, String cliente, String fecha, String estado, String iva,

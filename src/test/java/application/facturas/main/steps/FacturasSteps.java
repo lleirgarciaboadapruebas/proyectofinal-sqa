@@ -79,7 +79,7 @@ public class FacturasSteps extends AbstractStepsAndNavigation<FacturasAtributos,
         driver.introDatosInputByCss(atributos.inputPrecioConceptoCss, precio);
     }
 
-    public void clickEnButtonAñadirConcepto() {
+    public void clickEnButtonAnadirConcepto() {
         driver.writeStep(driver.getNameMethod());
         driver.clickById(atributos.buttonAnadirConceptoId);
     }

@@ -117,9 +117,9 @@ public abstract class ABaseTestCase{
     	DesiredCapabilities capability = DesiredCapabilities.chrome();
 //    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
 //      System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
-        capability.setBrowserName("firefox");
+        capability.setBrowserName("chrome");
 //        System.setProperty(GECKO_DRIVER_PROPERTY, GECKO_DRIVER_NAME);
-    	capability.setPlatform(Platform.WIN10);
+    	capability.setPlatform(Platform.MAC);
     	
     	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
     	
