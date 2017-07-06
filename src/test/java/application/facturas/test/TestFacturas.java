@@ -46,15 +46,6 @@ public class TestFacturas extends ABaseTestCase {
         baseUrl = baseUrll;
     }
 
-    @Override
-    public void setUser(String userr) {
-        user = userr;
-    }
-
-    @Override
-    public void setPassword(String passwordd) {
-        password = passwordd;
-    }
 
     @Override
     public String getApp() {
