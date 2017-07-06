@@ -117,12 +117,17 @@ public abstract class ABaseTestCase{
     	DesiredCapabilities capability = DesiredCapabilities.chrome();
 //    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
 //      System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
-        capability.setBrowserName("chrome");
-    	capability.setPlatform(Platform.MAC);
+        capability.setBrowserName("firefox");
+//        System.setProperty(GECKO_DRIVER_PROPERTY, GECKO_DRIVER_NAME);
+    	capability.setPlatform(Platform.WIN10);
+    	
+    	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
     	
     	driver = null;
     	try {
-			driver = new RemoteWebDriver(new URL("http://192.168.1.33:5566/wd/hub"), capability);
+//			driver = new RemoteWebDriver(new URL("http://192.168.1.33:5566/wd/hub"), capability);
+    		driver = new RemoteWebDriver(new URL("http://192.168.1.36:5599/wd/hub"), capability); // tete
+//    		driver = new RemoteWebDriver(new URL("http://10.0.2.15:5577/wd/hub"), capability);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
