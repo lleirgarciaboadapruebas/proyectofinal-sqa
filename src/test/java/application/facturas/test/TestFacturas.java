@@ -45,17 +45,7 @@ public class TestFacturas extends ABaseTestCase {
     public void setBaseUrl(String baseUrll) {
         baseUrl = baseUrll;
     }
-
-    @Override
-    public void setUser(String userr) {
-        user = userr;
-    }
-
-    @Override
-    public void setPassword(String passwordd) {
-        password = passwordd;
-    }
-
+    
     @Override
     public String getApp() {
         return app;
@@ -65,4 +55,10 @@ public class TestFacturas extends ABaseTestCase {
     public void setTestNameClass(String testNameClass) {
         testClassName = testNameClass;
     }
+
+	@Override
+	public void setTestCaseName(String testCaseName) {
+		// TODO Auto-generated method stub
+		
+	}
 }

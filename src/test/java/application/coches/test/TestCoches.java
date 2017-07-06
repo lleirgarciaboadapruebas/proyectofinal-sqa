@@ -67,16 +67,6 @@ public class TestCoches extends ABaseTestCase {
     }
 
     @Override
-    public void setUser(String userr) {
-        user = userr;
-    }
-
-    @Override
-    public void setPassword(String passwordd) {
-        password = passwordd;
-    }
-
-    @Override
     public String getApp() {
         return app;
     }
@@ -85,4 +75,11 @@ public class TestCoches extends ABaseTestCase {
     public void setTestNameClass(String testNameClass) {
         testClassName = testNameClass;
     }
+
+
+	@Override
+	public void setTestCaseName(String testCaseNamee) {
+		testCaseNamee = testCaseName;
+		
+	}
 }
