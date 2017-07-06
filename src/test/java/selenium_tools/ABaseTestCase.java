@@ -125,8 +125,8 @@ public abstract class ABaseTestCase{
     	
     	driver = null;
     	try {
-//			driver = new RemoteWebDriver(new URL("http://192.168.1.33:5566/wd/hub"), capability);
-    		driver = new RemoteWebDriver(new URL("http://192.168.1.36:5599/wd/hub"), capability); // tete
+            driver = new RemoteWebDriver(new URL("http://192.168.1.33:5566/wd/hub"), capability);
+//    		driver = new RemoteWebDriver(new URL("http://192.168.1.36:5599/wd/hub"), capability); // tete
 //    		driver = new RemoteWebDriver(new URL("http://10.0.2.15:5577/wd/hub"), capability);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
