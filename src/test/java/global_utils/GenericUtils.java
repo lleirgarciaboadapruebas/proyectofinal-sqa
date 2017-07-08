@@ -18,7 +18,7 @@ public class GenericUtils {
 		Random randomGenerator = new Random();
 	    
 	    for (int idx = 1; idx <= 10; ++idx){
-	    	res = randomGenerator.nextInt(100);
+	    	res = randomGenerator.nextInt(100000);
 	    }
 	    return res;
 	}

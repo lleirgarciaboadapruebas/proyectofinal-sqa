@@ -28,6 +28,7 @@ public class ClienteProcess extends AbstractStepsProcess<ClienteSteps, ClienteVa
     public void eliminarCliente(String nombre, String apellidos, String telefono) {
         steps.clickEnClientes();
         steps.eliminar(nombre, apellidos, telefono);
+        steps.clickAceptarEliminarCliente();        
     }
 
     private ClienteSteps steps;

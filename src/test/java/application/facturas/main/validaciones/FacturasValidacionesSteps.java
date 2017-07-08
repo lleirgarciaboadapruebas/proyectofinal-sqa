@@ -1,5 +1,7 @@
 package application.facturas.main.validaciones;
 
+import java.sql.Driver;
+
 import application.facturas.main.atributos.FacturasAtributos;
 import global_utils.AbstractValidations;
 
@@ -17,6 +19,16 @@ public class FacturasValidacionesSteps extends AbstractValidations<FacturasAtrib
 
 
         }
+    }
+    
+    public void validarComboCocheVisible(boolean isDetailed){
+    	if (isDetailed)
+    		esVisible(getDriverUtils().getByUtils().byId(atributos.comboVehiculoId));
+    }
+    
+    public void validarCocheSeleccionable(String marca, String modelo, String matricula, boolean isDetailed){
+    	if(isDetailed)
+    		validarOptionDisponibleEnCombo(atributos.comboVehiculoId, marca + " "+ modelo +" ("+ matricula +")");
     }
 
     public void validarExistenciaButtonCrearFactura(boolean isDetailed) {

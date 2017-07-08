@@ -97,7 +97,7 @@ public abstract class ABaseTestCase{
 
 
     private static final String URL1 = "https://localhost/tallerlavi3";
-    private static final String URL = "https://192.168.1.42/tallerlavi3";
+    private static final String URL = "https://192.168.1.42/tallerlavi_git";
 
 //    @Before
 //    public void seleniumIni() throws Exception {
@@ -122,6 +122,7 @@ public abstract class ABaseTestCase{
     	capability.setPlatform(Platform.MAC);
     	
     	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
+    	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
     	
     	driver = null;
     	try {

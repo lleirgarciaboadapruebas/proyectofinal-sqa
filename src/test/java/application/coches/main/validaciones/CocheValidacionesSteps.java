@@ -1,5 +1,7 @@
 package application.coches.main.validaciones;
 
+import org.openqa.selenium.WebElement;
+
 import application.coches.main.atributos.CochesAtributos;
 import global_utils.AbstractValidations;
 
@@ -12,7 +14,32 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
     public void validarPantallaListado(boolean isDetailed){
         validarTituloEncabezado(isDetailed);
         validarExistenciaButtonCrearCoche(isDetailed);
-        validarExistenciaTablaCoches(isDetailed);
+        validarExistenciaTabla(isDetailed);
+        validarFiltroModelo(isDetailed);
+        validarFiltroMarca(isDetailed);
+        validarFiltroMatricula(isDetailed);
+        validarFiltroNombreApellido(isDetailed);
+    }
+    
+
+    private void validarFiltroModelo(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteByName(atributos.inputModeloFiltroName);
+    }
+    
+    private void validarFiltroMarca(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteByName(atributos.inputMarcaFiltroName);
+    }
+    
+    private void validarFiltroMatricula(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteByName(atributos.inputMatriculaFiltroName);
+    }
+    
+    private void validarFiltroNombreApellido(boolean isDetailed) {
+        if (isDetailed)
+            validarCampoExistenteByName(atributos.inputNombreFiltroName);
     }
 
     /**
@@ -46,7 +73,7 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
             esVisible(getDriverUtils().getByUtils().byId(atributos.selectorBtnCrear));
     }
 
-    public void validarExistenciaTablaCoches(boolean isDetailed){
+    public void validarExistenciaTabla(boolean isDetailed){
         if(isDetailed)
             esVisible(getDriverUtils().getByUtils().byId(atributos.tableid));
     }
@@ -76,22 +103,22 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
     
     public void validarCampoExistenteMatricula(boolean isDetailed){
         if(isDetailed)
-            validarCampoExistenteById(atributos.matriculaClass);
+            validarCampoExistenteById(atributos.labelMatriculaClass);
     }
 
     public void validarCampoExistenteMarca(boolean isDetailed){
         if(isDetailed)
-            validarCampoExistenteById(atributos.marcaClass);
+            validarCampoExistenteById(atributos.labelMarcaClass);
     }
 
     public void validarCampoExistenteModelo(boolean isDetailed){
         if(isDetailed)
-            validarCampoExistenteById(atributos.modeloClass);
+            validarCampoExistenteById(atributos.labelModeloClass);
     }
 
     public void validarCampoExistenteKmActuales(boolean isDetailed){
         if(isDetailed)
-            validarCampoExistenteById(atributos.kmActualesClass);
+            validarCampoExistenteById(atributos.labelKmActualesClass);
     }
 
     public void validarCampoExistenteCliente(boolean isDetailed){
@@ -101,29 +128,29 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
 
     public void validarCampoExistenteNumBastidor(boolean isDetailed){
         if(isDetailed)
-            validarCampoExistenteById(atributos.numBastidorClass);
+            validarCampoExistenteById(atributos.labelNumBastidorClass);
     }
 
 
 
     public void validarMatricula(boolean isDetailed, String expectedMatricula){
         if(isDetailed)
-            validarTextoById(atributos.matriculaClass, expectedMatricula);
+            validarTextoById(atributos.labelMatriculaClass, expectedMatricula);
     }
 
     public void validarMarca(boolean isDetailed, String expectedMarca){
         if(isDetailed)
-            validarTextoById(atributos.marcaClass, expectedMarca);
+            validarTextoById(atributos.labelMarcaClass, expectedMarca);
     }
 
     public void validarModelo(boolean isDetailed, String expectedModelo){
         if(isDetailed)
-            validarTextoById(atributos.modeloClass, expectedModelo);
+            validarTextoById(atributos.labelModeloClass, expectedModelo);
     }
 
     public void validarKmActuales(boolean isDetailed, String expectedkm){
         if(isDetailed)
-            validarTextoById(atributos.kmActualesClass, expectedkm);
+            validarTextoById(atributos.labelKmActualesClass, expectedkm);
     }
 
     public void validarCliente(boolean isDetailed, String expectedClient){
@@ -165,7 +192,15 @@ public class CocheValidacionesSteps extends AbstractValidations<CochesAtributos>
         return atributos;
     }
 
-    public void validarCocheEnListado(String matricula, String marca, boolean isDetailed) {
+    public void validarCocheEnListado(String matricula, String marca, String modelo, boolean isDetailed) {
+    	 if (isDetailed) {
 
+             WebElement tr = getDriverUtils().devolverWebElement(atributos.selectorTabla, "td:nth-child(1)", "td:nth-child(2)", "td:nth-child(3)", modelo, marca, matricula);
+             if (tr == null)
+                 error("No se ha encontrado el Vehiculo con con matricula '"+ matricula +"' de la marca y modelo '"+ marca +"' '"+ modelo +"'.");
+             else
+             	getDriverUtils().writeStepValidation("Se ha encontrado el Vehiculo con con matricula '"+ matricula +"' de la marca y modelo '"+ marca +"' '"+ modelo +"'.");
+         }
+    	
     }
 }

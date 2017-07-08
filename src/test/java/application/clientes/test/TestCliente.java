@@ -16,43 +16,49 @@ public class TestCliente extends ABaseTestCase {
     public void ini() {
         setBaseUrl("192.168.1.42/tallerlavi3/");
         setTestNameClass(this.getClass().getName());
-//        System.setProperty(DETAIL_VALIDATION_STEP, "false");
         setDetailValidation(false);
     }
 
-    @Test
+    @Test 		// test okay
     public void validarPantallaListadoCliente() throws Exception {
     	setTestCaseName(getNameTest());
         Cliente.steps.clickEnClientes();
         Cliente.validaciones.validarPantallaListado(true);
     }
 
-    @Test
-    public void validarCreacionClienteEnListado() throws Exception {
+    @Test		// test okay
+    public void validarClienteCreadoEnListado() throws Exception {
     	setTestCaseName(getNameTest());
-        String nif = Integer.toString(GenericUtils.randomNumberSpecificRange(0, 10));
-        Cliente.process.crearCliente(nif, "Pepito", "Sousa", "C/ Sin numero", "Cardedeu", "653847238", "");
+        String nif = Integer.toString(GenericUtils.randomNumberBetween());
+        String telefono = Integer.toString(GenericUtils.randomNumberSpecificRange(0, 25));
+        Cliente.process.crearCliente(nif, "Pepito", "Sousa", "C/ Sin numero", "Cardedeu", telefono, "");
         Cliente.steps.clickEnClientes();
-        Cliente.validaciones.validarClienteEnListado("Pepito", "Sousa", "653847238");
+        Cliente.validaciones.validarClienteEnListado("Pepito", "Sousa", telefono, true);
     }
 
 
-    @Test
+    @Test 		// test okay
     public void validarClienteDisponibleEnCreacionCoche() throws Exception {
     	setTestCaseName(getNameTest()); 
-        String nif = Integer.toString(GenericUtils.randomNumberSpecificRange(0, 10));
-        Cliente.process.crearCliente(nif, "Lourdes", "Martinez", "C/ Sin numero", "Cardedeu", "653847238", "");
+        String nif = Integer.toString(GenericUtils.randomNumberBetween());
+        String nombre = GenericUtils.randomString(10);
+        Cliente.process.crearCliente(nif, nombre, "Martinez", "C/ Sin numero", "Cardedeu", "653847238", "");
         Coches.steps.clickEnMenuCoches();
+        Coches.steps.crear();
         Coches.validaciones.validarClienteSeleccionableEnCreacionCoche("Lourdes Martinez");
     }
 
-    @Test
+    @Test 		// test okay
     public void eliminarClienteValidarClienteEliminadoCocheEliminado() throws Exception {
-        String nif = Integer.toString(GenericUtils.randomNumberSpecificRange(0, 10));
-        Cliente.process.crearCliente(nif, "Pepe", "Costa", "C/ Sin numero", "Cardedeu", "653847238", "");
-        Coches.process.crearCoche("4254-HJS", "Mercedes", "CLK 200", "190000", "3242-3242-4353-3453", "Pepe Costa");
-        Cliente.process.eliminarCliente("Pepe", "Costa", "653847238");
-        Cliente.validaciones.validarclienteInexistenteEnListado("Pepe", "Costa", "653847238", true);
+        String nif = Integer.toString(GenericUtils.randomNumberBetween());
+        String nombre = GenericUtils.randomString(10);
+        String apellido = GenericUtils.randomString(10);
+        String completo = nombre +" "+ apellido;
+        
+        Cliente.process.crearCliente(nif, nombre, apellido, "C/ Sin numero", "Cardedeu", "653847238", "");
+        Coches.process.crearCoche(nif, "Mercedes", "CLK 200", "190000", "3242-3242-4353-3453", completo);
+        Cliente.process.eliminarCliente(nombre, apellido, "653847238");
+        Cliente.validaciones.validarclienteInexistenteEnListado(nombre, apellido, "653847238", true);
     }
 
 

@@ -11,8 +11,8 @@ import global_utils.AbstractValidations;
 public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtributos>{
 
 
-    public void validarClienteEnListado(String nombre, String apellidos, String telefono) {
-        if(isDetailed()){
+    public void validarClienteEnListado(String nombre, String apellidos, String telefono, boolean isDetailed) {
+        if(isDetailed){
         	WebElement tr_expected = getDriverUtils().devolverWebElement(atributos.selectorTabla, 
         			"td:nth-child(1)", "td:nth-child(2)", "td:nth-child(4)", nombre, apellidos, telefono);
         	
@@ -33,12 +33,18 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
 
     public void validarPantallaListado(boolean isDetailed) {
         validarCampoExistenteTabla(isDetailed);
+        validarExistenciaButtonCrearCliente(isDetailed);
         validarCampoExistenteFiltroNombre(isDetailed);
         validarCampoExistenteFiltroApellido(isDetailed);
         validarCampoExistenteFiltroTelefono(isDetailed);
         validarCampoExistenteFiltroNif(isDetailed);
     }
 
+    public void validarExistenciaButtonCrearCliente(boolean isDetailed) {
+        if (isDetailed)
+            esVisible(getDriverUtils().getByUtils().byId(atributos.selectorBtnCrear));
+    }
+    
     private void validarCampoExistenteTabla(boolean isDetailed) {
         if (isDetailed)
             validarCampoExistenteByClass(atributos.tablaClass);
@@ -101,9 +107,11 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
     
     public void validarTextoIntroducido(String expected, String clas, boolean isDetailed){
         if(isDetailed){
-            validarTextoByClass(clas, expected, null);
+            validarTextoByCss(clas, expected, null);
         }
     }
+    
+    
 
     private ClienteAtributos atributos;
 
@@ -119,9 +127,11 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
     public void validarclienteInexistenteEnListado(String nombre, String apellidos, String telefono, boolean isDetailed) {
         if (isDetailed) {
 
-            WebElement tr = getDriverUtils().devolverWebElement(atributos.selectorTabla, "td:nth-child(1)", "td:nth-child(2)", "td_nth-child(3)", nombre, apellidos, telefono);
-            if (tr == null)
-                error("No se ha encontrado el Cliente con Nombre y Apellidos '" + nombre + " " + apellidos + "' y Telefono '" + telefono + "'");
+            WebElement tr = getDriverUtils().devolverWebElement(atributos.selectorTabla, "td:nth-child(1)", "td:nth-child(2)", "td:nth-child(4)", nombre, apellidos, telefono);
+            if (tr != null)
+                error("Se ha encontrado el Cliente con Nombre y Apellidos '" + nombre + " " + apellidos + "' y Telefono '" + telefono + "' y no deberia ya que no existe.");
+            else
+            	getDriverUtils().writeStepValidation("El cliente buscado '"+ nombre +" "+ apellidos +"' y telefono '"+ telefono +"' no existe.");
         }
     }
 }

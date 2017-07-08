@@ -25,6 +25,15 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
             getDriverUtils().writeStepValidation("Campo existente con ID: '" + idExpected + "'.");
 
     }
+    
+    protected void validarCampoExistenteByName(String nameExpected) {
+        if (!existeCampo(getDriverUtils().getByUtils().byName(nameExpected)))
+            error("Se esperaba un campo en pantalla pero no se encontr� o no esta visible '" + nameExpected + "'");
+        else
+            getDriverUtils().writeStepValidation("Campo existente con NAME: '" + nameExpected + "'.");
+    }
+    
+    
 
     protected void vlaidarCampoExistenteByClass(String classExpected) {
         if (!existeCampo(getDriverUtils().getByUtils().byClass(classExpected)))
@@ -86,7 +95,7 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         if (!eq(strPantalla, expected))
             error("Se esperaba el texto '"+ expected + "' pero se encontró '"+ strPantalla + "'");
         else
-            getDriverUtils().writeStepValidation("Texto buscado por ID '" + expected + "' esperado validado.");
+            getDriverUtils().writeStepValidation("Texto buscado por ID '"+ id +"' : '" + expected + "' esperado validado.");
 
     }
 
@@ -97,7 +106,17 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         if (!eq(strPantalla, expected))
             error(msg +" En pantalla se mustra el literal: '"+ strPantalla + "'");
         else
-            getDriverUtils().writeStepValidation("Texto  buscado por CLASS '" + expected + "' esperado validado.");
+            getDriverUtils().writeStepValidation("Texto  buscado por CLASS '"+ clas +"' : '" + expected + "' esperado validado.");
+    }
+    
+    protected void validarTextoByCss(String css, String expected, String msg){
+        write("Validacion de texto by CLASS");
+        validarCampoExistenteByCss(css);
+        String strPantalla = (getDriverUtils().getTextoByCss(css));
+        if (!eq(strPantalla, expected))
+            error(msg +" En pantalla se mustra el literal: '"+ strPantalla + "'");
+        else
+            getDriverUtils().writeStepValidation("Texto buscado por patron CSS '" + css + "' : '"+ expected +"' esperado validado.");
     }
 
     protected void validarValueByCss(String css, String expected, String msg) {
@@ -107,7 +126,7 @@ public abstract class AbstractValidations<AtributosPantalla> extends AbstractBas
         if (!eq(strPantalla, expected))
             error("Se esperaba el valor '" + expected + "' en el campo patron Css '" + css + "' pero se encontr�: '" + strPantalla + "'");
         else
-            getDriverUtils().writeStepValidation("Value de INPUT buscado por CSS '" + expected + "' esperado validado.");
+            getDriverUtils().writeStepValidation("Value de INPUT buscado por CSS '" + css + "' : '"+ expected +"' esperado validado.");
     }   
 
     protected void validarTextSpanById(String id, String expected, String msg) {

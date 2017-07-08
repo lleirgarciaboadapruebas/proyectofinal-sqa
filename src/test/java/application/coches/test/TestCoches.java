@@ -2,6 +2,8 @@ package application.coches.test;
 
 import application.clientes.main.Cliente;
 import application.coches.main.Coches;
+import application.facturas.main.Factura;
+import cucumber.deps.com.thoughtworks.xstream.core.util.Pool.Factory;
 import global_utils.GenericUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,19 +17,19 @@ public class TestCoches extends ABaseTestCase {
 
     @Before
     public void ini() {
-        setBaseUrl("192.168.1.42/tallerlavi3/");
+        setBaseUrl("192.168.1.42/tallerlavi_git/");
         setTestNameClass(this.getClass().getName());
         setDetailValidation(false);
     }
 
 
-    @Test
+    @Test			// test okey
     public void validarPantallaListadoCoches() throws Exception {
         Coches.process.irListadoCoches();
         Coches.validaciones.validarPantallaListado(true);
     }
 
-    @Test
+    @Test			// test okey
     public void validarCreacionCocheEnListado() throws Exception {
         String matricula = GenericUtils.randomString(10);
         String marca = GenericUtils.randomString(10);
@@ -36,10 +38,10 @@ public class TestCoches extends ABaseTestCase {
 
         Coches.process.crearCoche(matricula, marca, modelo, "200000", "1283-2392-3829-3243", "ALBA FARRES JUBANY");
         Coches.steps.clickEnMenuCoches();
-        Coches.validaciones.validarCocheEnListado(matricula, marca, true);
+        Coches.validaciones.validarCocheEnListado(matricula, marca, modelo, true);
     }
 
-    @Test
+    @Test  		// test okey
     public void validarCocheDisponibleEnCreacionFactura() throws Exception {
         String matricula = GenericUtils.randomString(10);
         String marca = GenericUtils.randomString(10);
@@ -47,16 +49,23 @@ public class TestCoches extends ABaseTestCase {
         String nif = GenericUtils.randomString(8) + "N";
         String nombre = GenericUtils.randomString(7);
         String apellidos = GenericUtils.randomString(8);
+        String completo  = nombre +" "+apellidos;        		
         String telefono = Integer.toString(GenericUtils.randomNumberSpecificRange(12, 23));
 
 
-        Coches.process.crearCoche(matricula, marca, modelo, "200000", "1283-2392-3829-3243", "ALBA FARRES JUBANY");
         Cliente.process.crearCliente(nif, nombre, apellidos, "Psg/ la garza 10", "Cardedeu", telefono, "");
+        Coches.process.crearCoche(matricula, marca, modelo, "200000", "1283-2392-3829-3243", completo);
+        Factura.steps.clickEnMenuFacturas();
+        Factura.steps.crear();
+        Factura.steps.seleccionarCliente(completo);
+        Factura.validaciones.validarComboCocheVisible(true);
+        Factura.validaciones.validarCocheSeleccionable(marca, modelo, matricula, true);
+        
 
     }
 
     @Test
-    public void vlaidarEliminacionCOche() throws Exception {
+    public void validarEliminacionCoche() throws Exception {
 
     }
 

@@ -19,6 +19,7 @@ public class ClienteSteps extends AbstractSteps<ClienteAtributos, ClienteValidac
 
     public void clickEnClientes() {
         Menu.process.clickEnClientes();
+        driver.waitForElementPresentWithClass(atributos.tablaClass);
         validaciones.validarPantallaListado(validaciones.isDetailed());
     }
 
@@ -68,26 +69,17 @@ public class ClienteSteps extends AbstractSteps<ClienteAtributos, ClienteValidac
     }
 
 
-    public void eliminar(String nombre, String apellido, String numeroTelefono) {
-        List<WebElement> trs = driver.findElementsByCss(atributos.selectorTabla);
-
-        for (WebElement tr : trs) {
-            String td_nombre = driver.getTextoByWebElement(tr, driver.getByUtils().byCss("td:nth-child(1)"));
-            String td_apellidos = driver.getTextoByWebElement(tr, driver.getByUtils().byCss("td:nth-child(2)"));
-            String td_telefono = driver.getTextoByWebElement(tr, driver.getByUtils().byCss("td:nth-child(4)"));
-
-            boolean nombreok = StringUtils.equals(td_nombre, nombre);
-            boolean apellidosok = StringUtils.equals(td_apellidos, apellido);
-            boolean telefonook = StringUtils.equals(td_telefono, numeroTelefono);
-
-            if (nombreok && apellidosok && telefonook)
-                driver.clickWebELement(tr, driver.getByUtils().byCss(atributos.selectorEliminar));
-
+    public void eliminar(String nombre, String apellidos, String telefono) {
+        WebElement tr_expected = getDriverUtils().devolverWebElement(atributos.selectorTabla, 
+    			"td:nth-child(1)", "td:nth-child(2)", "td:nth-child(4)", nombre, apellidos, telefono);
+        if(tr_expected != null){
+	        List<WebElement> a = driver.findElements(tr_expected, driver.getByUtils().byCss(".td-acciones > a"));
+	        driver.clickWebElement(a.get(0));
         }
-
-        // alert (aceptar!)
-
-
+    }
+    
+    public void clickAceptarEliminarCliente(){
+    	driver.acceptarAlert();
     }
 
     public void insertarNif(String nif) {
@@ -103,7 +95,7 @@ public class ClienteSteps extends AbstractSteps<ClienteAtributos, ClienteValidac
 
     public void insertarApellidos(String apellidos) {
         driver.introDatosInputByCss(atributos.labelValueApellidosCss, apellidos);
-//        validations.validarTextoIntroducido(nif, atributos.nifClass, false);
+        validaciones.validarTextoIntroducido(apellidos, atributos.labelApellidosClass, false);
     }
 
     public void insertarDireccion(String direccion) {

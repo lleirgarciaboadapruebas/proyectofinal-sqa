@@ -23,9 +23,10 @@ public class ClienteAtributos  extends AtributosGenerales{
     public final String labelTel2Class = "label-telefono_segundario";
     public final String labelValueTel2Css = "." + labelTel2Class + " + input";
 
-    public final String tablaClass = "table-listados";
+    // tabla listado
+    public final String tablaClass = "table-listado";
     public final String selectorTabla = ".table-listado tr:not(:first-child)";
-    public final String selectorEliminar = ".td-acciones > a:nth-child(1)";
+    public final String selectorEliminar = ".td-acciones > a:nth-child(2)";
 
     public final String nifFiltro       = "nif";
     public final String nombreFiltro    = "nombre";

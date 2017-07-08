@@ -20,6 +20,7 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
     public void clickEnMenuCoches() {
         driver.writeStep(driver.getNameMethod());
         menuSteps.clickEnCoches();
+        driver.waitForElementPresentWithId(atributos.btnCrearId);
         validations.validarPantallaListado(validations.isDetailed());
     }
 
@@ -76,13 +77,13 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
     public void guardarDatos() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonGuardarDatos(validations.isDetailed());
-        driver.clickButtonById(atributos.btnCrearId);
+        driver.clickById(atributos.btnGuardarId);
     }
 
     public void cancelarDatos() {
         driver.writeStep(driver.getNameMethod());
         validations.validarExistenciaButtonCrearCoche(validations.isDetailed());
-        driver.clickButtonById(atributos.btnCrearId);
+        driver.clickById(atributos.btnCrearId);
     }
 
     public void editarEnListado(String matricula) {
@@ -105,41 +106,41 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
     public void insertarMatricula(String matricula){
         driver.writeStep(driver.getNameMethod());
         validations.validarCampoExistenteMatricula(validations.isDetailed());
-        driver.introDatosInputById(getAtributos().matriculaClass, matricula);
+        driver.introDatosInputByCss(getAtributos().labelValueMatriculaCss, matricula);
     }
 
     /** Escribo marca. */
     public void insertarMarca(String marca){
         driver.writeStep(driver.getNameMethod());
         validations.validarCampoExistenteMarca(validations.isDetailed());
-        driver.introDatosInputByClass(getAtributos().marcaClass, marca);
+        driver.introDatosInputByCss(getAtributos().labelValueMarcaCss, marca);
     }
 
     /** Escribo modelo. */
     public void insertarModelo(String modelo){
         driver.writeStep(driver.getNameMethod());
         validations.validarCampoExistenteModelo(validations.isDetailed());
-        driver.introDatosInputByClass(getAtributos().modeloClass, modelo);
+        driver.introDatosInputByCss(getAtributos().labelValueModeloCss, modelo);
     }
 
     /** Escribo km actuales. */
     public void insertarKmActuales(String kmActuales){
         driver.writeStep(driver.getNameMethod());
         validations.validarCampoExistenteKmActuales(validations.isDetailed());
-        driver.introDatosInputByClass(getAtributos().kmActualesClass, kmActuales);
+        driver.introDatosInputByCss(getAtributos().labelValueKmActualesCss, kmActuales);
     }
 
     /** Escribo num bastidor. */
     public void insertarNumBastidor(String numBastidor){
         driver.writeStep(driver.getNameMethod());
         validations.validarCampoExistenteNumBastidor(validations.isDetailed());
-        driver.introDatosInputByClass(getAtributos().numBastidorClass, numBastidor);
+        driver.introDatosInputByCss(getAtributos().labelValueNumBastidorCss, numBastidor);
     }
 
     public void seleccionarCliente(String cliente) {
         driver.writeStep(driver.getNameMethod());
         validations.validarCampoExistenteCliente(validations.isDetailed());
-        driver.selecTextByClass(getAtributos().matriculaClass, cliente);
+        driver.selecTextById(getAtributos().selectClienteId, cliente);
     }
 
 
