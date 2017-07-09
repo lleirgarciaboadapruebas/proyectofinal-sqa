@@ -135,20 +135,25 @@ public abstract class ABaseTestCase{
     	System.out.println("platrafooooorma ++++++++++++++++++++++ "+ platform);
     	if(StringUtils.equals(platform, "MAC")){
     		capability.setPlatform(Platform.MAC);
+    	} else if(StringUtils.equals(platform, "WIN10")){
+    		capability.setPlatform(Platform.WIN10);
     	}
+    	
     	
     	// else con IE y Firefox
     	
     	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
     	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
     	
+    	String url = System.getProperty("webdriver.url");
+    	System.out.println(url);
     	driver = null;
     	try {
-            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5566/wd/hub"), capability);
-//    		driver = new RemoteWebDriver(new URL("http://10.0.2.2:5500/wd/hub"), capability);
+//            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5566/wd/hub"), capability);
+    		driver = new RemoteWebDriver(new URL(url), capability);
     		
     		
-//    		driver = new RemoteWebDriver(new URL("http://192.168.1.36:5599/wd/hub"), capability); // tete
+//    		driver = new RemoteWebDriver(new URL("http://192.168.1.35:5522/wd/hub"), capability); // tete
 //    		driver = new RemoteWebDriver(new URL("http://10.0.2.15:5577/wd/hub"), capability);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
