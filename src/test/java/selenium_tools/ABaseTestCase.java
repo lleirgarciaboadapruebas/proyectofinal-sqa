@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
@@ -114,19 +115,39 @@ public abstract class ABaseTestCase{
 //    }
     @Before
     public void seleniumRemoteHubWebDriver() {
-    	DesiredCapabilities capability = DesiredCapabilities.chrome();
+    	DesiredCapabilities capability = null;
 //    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
 //      System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
-        capability.setBrowserName("chrome");
+    	
+    	String browser = System.getProperty("browse.name");
+    	System.out.println("browseeee ++++++++++++++++++++++ "+ browser);
+    	
+    	if(StringUtils.equals(browser, "chrome"))
+    		capability = DesiredCapabilities.chrome();
+    	// elses IE i firefoz
+    	
+    	capability.setBrowserName(browser);
+    	
+//        capability.setBrowserName("chrome");
 //        System.setProperty(CHROME_DRIVER_PROPERTY, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
-    	capability.setPlatform(Platform.MAC);
+    	
+    	String platform = System.getProperty("webdriver.platform.name");
+    	System.out.println("platrafooooorma ++++++++++++++++++++++ "+ platform);
+    	if(StringUtils.equals(platform, "MAC")){
+    		capability.setPlatform(Platform.MAC);
+    	}
+    	
+    	// else con IE y Firefox
     	
     	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
     	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
     	
     	driver = null;
     	try {
-            driver = new RemoteWebDriver(new URL("http://192.168.1.37:5566/wd/hub"), capability);
+            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5566/wd/hub"), capability);
+//    		driver = new RemoteWebDriver(new URL("http://10.0.2.2:5500/wd/hub"), capability);
+    		
+    		
 //    		driver = new RemoteWebDriver(new URL("http://192.168.1.36:5599/wd/hub"), capability); // tete
 //    		driver = new RemoteWebDriver(new URL("http://10.0.2.15:5577/wd/hub"), capability);
 		} catch (MalformedURLException e) {
@@ -164,8 +185,8 @@ public abstract class ABaseTestCase{
 
     protected WebDriver loadDriver() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-//        String browser = System.getProperty("selenium.browser");
-        String browser = "chrome";
+        String browser = System.getProperty("selenium.browser");
+//        String browser = "chrome";
         String remoteWebDriverUrl = System.getProperty("selenium.remotewebdriver.url");
         if (BrowserType.FIREFOX.equals(browser)) {
             /** Firefox Driver **/
