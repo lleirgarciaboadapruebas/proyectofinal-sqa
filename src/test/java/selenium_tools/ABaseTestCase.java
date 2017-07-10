@@ -124,12 +124,13 @@ public abstract class ABaseTestCase{
     	
     	if(StringUtils.equals(browser, "chrome"))
     		capability = DesiredCapabilities.chrome();
-    	// elses IE i firefoz
+    	else if(StringUtils.equals(browser, "firefox"))
+    		capability = DesiredCapabilities.firefox();
+    	
+    	
+    	// elses IE
     	
     	capability.setBrowserName(browser);
-    	
-//        capability.setBrowserName("chrome");
-//        System.setProperty(CHROME_DRIVER_PROPERTY, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
     	
     	String platform = System.getProperty("webdriver.platform.name");
     	System.out.println("platrafooooorma ++++++++++++++++++++++ "+ platform);
@@ -139,8 +140,6 @@ public abstract class ABaseTestCase{
     		capability.setPlatform(Platform.WIN10);
     	}
     	
-    	
-    	// else con IE y Firefox
     	
     	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
     	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
