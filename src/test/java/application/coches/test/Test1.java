@@ -27,10 +27,10 @@ public class Test1 extends ABaseTestCase {
         setDetailValidation(false);
     }
 
-//    @Ignore @Test
-//    public void t_ir_listado_coches() throws Exception{
-//        Coches.process.irListadoCoches();
-//    }
+    @Test
+    public void t_ir_listado_coches() throws Exception{
+        Coches.process.irListadoCoches();
+    }
 //
 //    @Ignore @Test
 //    public void t_validar_pantalla_creacion_coche() throws Exception {
