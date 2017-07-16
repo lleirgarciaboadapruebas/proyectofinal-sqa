@@ -156,7 +156,7 @@ public abstract class ABaseTestCase{
 	    	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
 	    	
 	    	String url = System.getProperty("webdriver.url");
-	    	System.out.println(url);
+	    	System.out.println(url); 
 	    	
 	    	driver = null;
 	    	try {
@@ -263,10 +263,10 @@ public abstract class ABaseTestCase{
 
     @After
     public void tearDown() throws Exception {
-         Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");
-         Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
-         Thread.sleep(1000);
-         Runtime.getRuntime().exec("taskkill /F /IM WerFault.exe");
+//         Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");
+//         Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
+//         Thread.sleep(1000);
+//         Runtime.getRuntime().exec("taskkill /F /IM WerFault.exe");
 		driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {

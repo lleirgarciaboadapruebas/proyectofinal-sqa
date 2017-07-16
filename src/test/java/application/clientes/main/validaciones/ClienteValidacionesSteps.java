@@ -22,7 +22,8 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
     }
 
     public void validarPantallaCreacion(boolean isDetailed) {
-        validarCampoExistenteNif(isDetailed);
+    	getDriverUtils().waitForElementPresentWithClass(atributos.labelNifClass);
+    	validarCampoExistenteNif(isDetailed);
         validarCampoExistenteNombre(isDetailed);
         validarCampoExistenteApellidos(isDetailed);
         validarCampoExistenteDireccion(isDetailed);
@@ -32,7 +33,8 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
     }
 
     public void validarPantallaListado(boolean isDetailed) {
-        validarCampoExistenteTabla(isDetailed);
+    	getDriverUtils().waitForElementPresentWithClass(atributos.tablaClass);
+    	validarCampoExistenteTabla(isDetailed);
         validarExistenciaButtonCrearCliente(isDetailed);
         validarCampoExistenteFiltroNombre(isDetailed);
         validarCampoExistenteFiltroApellido(isDetailed);
@@ -126,7 +128,7 @@ public class ClienteValidacionesSteps extends AbstractValidations<ClienteAtribut
 
     public void validarclienteInexistenteEnListado(String nombre, String apellidos, String telefono, boolean isDetailed) {
         if (isDetailed) {
-
+        	getDriverUtils().waitForElementVisibleWith(atributos.tablaClass);
             WebElement tr = getDriverUtils().devolverWebElement(atributos.selectorTabla, "td:nth-child(1)", "td:nth-child(2)", "td:nth-child(4)", nombre, apellidos, telefono);
             if (tr != null)
                 error("Se ha encontrado el Cliente con Nombre y Apellidos '" + nombre + " " + apellidos + "' y Telefono '" + telefono + "' y no deberia ya que no existe.");
