@@ -6,6 +6,7 @@ import application.facturas.main.Factura;
 import cucumber.deps.com.thoughtworks.xstream.core.util.Pool.Factory;
 import global_utils.GenericUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import selenium_tools.ABaseTestCase;
 
@@ -41,6 +42,20 @@ public class TestCoches extends ABaseTestCase {
         Coches.validaciones.validarCocheEnListado(matricula, marca, modelo, true);
     }
 
+    @Test
+    public void t_validar_pantalla_vista_coche() throws Exception {
+        Coches.process.irListadoCoches();
+        Coches.steps.editarEnListado("0092 GYR");
+        Coches.validaciones.validarPantallaVista(true);
+    }
+    
+    @Test
+	  public void t_validar_pantalla_creacion_coche() throws Exception {
+	      Coches.process.irListadoCoches();
+	      Coches.steps.crear();
+	      Coches.validaciones.validarPantallaCreacion(true);
+	  }
+    
     @Test  		// test okey
     public void validarCocheDisponibleEnCreacionFactura() throws Exception {
         String matricula = GenericUtils.randomString(10);
@@ -64,10 +79,7 @@ public class TestCoches extends ABaseTestCase {
 
     }
 
-    @Test
-    public void validarEliminacionCoche() throws Exception {
 
-    }
 
 
     @Override
