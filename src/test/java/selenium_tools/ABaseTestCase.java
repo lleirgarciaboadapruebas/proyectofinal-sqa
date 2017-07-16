@@ -119,7 +119,20 @@ public abstract class ABaseTestCase{
 
     	if(System.getProperty("remote")==null){
     	    ChromeOptions o = new ChromeOptions();
-          System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
+
+    	  String resource_webdriver = System.getProperty("webdriver.resource.driver");
+          String browse = System.getProperty("browse.name");
+
+          
+          if(StringUtils.equals(browse, "chrome"))
+        	  resource_webdriver = "chromedirver.exe";
+	      else if(StringUtils.equals(browse, "firefox"))
+	    	  resource_webdriver = "geckodriver.exe";
+         
+          System.setProperty(CHROME_DRIVER_PROPERTY, resource_webdriver.isEmpty() ? 
+        		  "C:\\Users\\Lleir Garcia\\git\\proyectofinal-sqa2\\resource\\drivers\\chromedriver.exe" :
+        			  resource_webdriver);
+          
           ArrayList<String> oList = new ArrayList<String>();
           oList.add("--start-maximize");
           oList.add("--incognito");
