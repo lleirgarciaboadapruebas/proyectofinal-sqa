@@ -125,7 +125,7 @@ public abstract class ABaseTestCase{
 
           
           if(StringUtils.equals(browse, "chrome"))
-        	  resource_webdriver += "chromedirver.exe";
+        	  resource_webdriver += "chromedriver.exe";
 	      else if(StringUtils.equals(browse, "firefox"))
 	    	  resource_webdriver += "geckodriver.exe";
          
