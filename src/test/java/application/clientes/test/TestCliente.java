@@ -60,7 +60,7 @@ public class TestCliente extends ABaseTestCase {
         Cliente.process.eliminarCliente(nombre, apellido, "653847238");
         Cliente.validaciones.validarclienteInexistenteEnListado(nombre, apellido, "653847238", true);
     }
-
+    
 
     @Override
     public void setBaseUrl(String baseUrll) {
