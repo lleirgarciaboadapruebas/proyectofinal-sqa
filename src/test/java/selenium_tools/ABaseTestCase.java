@@ -140,8 +140,10 @@ public abstract class ABaseTestCase{
 	    		capability = DesiredCapabilities.firefox();
 	
 	    	capability.setBrowserName(browser);
+	    	System.out.println(browser);
 	    	
 	    	String platform = System.getProperty("webdriver.platform.name");
+	    	System.out.println(platform);
 	    	
 	    	if(StringUtils.equals(platform, "MAC")){
 	    		capability.setPlatform(Platform.MAC);
@@ -155,6 +157,7 @@ public abstract class ABaseTestCase{
 	    	
 	    	String url = System.getProperty("webdriver.url");
 	    	System.out.println(url);
+	    	
 	    	driver = null;
 	    	try {
 	            driver = new RemoteWebDriver(new URL(url), capability);
