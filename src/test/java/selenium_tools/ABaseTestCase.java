@@ -119,45 +119,60 @@ public abstract class ABaseTestCase{
 //    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
 //      System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
     	
-    	String browser = System.getProperty("browse.name");
-    	System.out.println("browseeee ++++++++++++++++++++++ "+ browser);
+    	if(System.getProperty("remote")==null){
+    	    ChromeOptions o = new ChromeOptions();
+          System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
+          ArrayList<String> oList = new ArrayList<String>();
+          oList.add("--start-maximize");
+          oList.add("--incognito");
+          o.addArguments(oList);
+          driver = new ChromeDriver(o);
+          driver.get(URL);
+          wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
+    	} 
     	
-    	if(StringUtils.equals(browser, "chrome"))
-    		capability = DesiredCapabilities.chrome();
-    	else if(StringUtils.equals(browser, "firefox"))
-    		capability = DesiredCapabilities.firefox();
+    	else {
     	
-    	
-    	// elses IE
-    	
-    	capability.setBrowserName(browser);
-    	
-    	String platform = System.getProperty("webdriver.platform.name");
-    	System.out.println("platrafooooorma ++++++++++++++++++++++ "+ platform);
-    	if(StringUtils.equals(platform, "MAC")){
-    		capability.setPlatform(Platform.MAC);
-    	} else if(StringUtils.equals(platform, "WIN10")){
-    		capability.setPlatform(Platform.WIN10);
+	    	String browser = System.getProperty("browse.name");
+	    	System.out.println("browseeee ++++++++++++++++++++++ "+ browser);
+	    	
+	    	if(StringUtils.equals(browser, "chrome"))
+	    		capability = DesiredCapabilities.chrome();
+	    	else if(StringUtils.equals(browser, "firefox"))
+	    		capability = DesiredCapabilities.firefox();
+	    	
+	    	
+	    	// elses IE
+	    	
+	    	capability.setBrowserName(browser);
+	    	
+	    	String platform = System.getProperty("webdriver.platform.name");
+	    	
+	    	if(StringUtils.equals(platform, "MAC")){
+	    		capability.setPlatform(Platform.MAC);
+	    	} else if(StringUtils.equals(platform, "WIN10")){
+	    		capability.setPlatform(Platform.WIN10);
+	    	}
+	    	
+	    	
+	    	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
+	    	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
+	    	
+	    	String url = System.getProperty("webdriver.url");
+	    	System.out.println(url);
+	    	driver = null;
+	    	try {
+	//            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5566/wd/hub"), capability);
+	    		driver = new RemoteWebDriver(new URL(url), capability);
+	    		
+	    		
+	//    		driver = new RemoteWebDriver(new URL("http://192.168.1.35:5522/wd/hub"), capability); // tete
+	//    		driver = new RemoteWebDriver(new URL("http://10.0.2.15:5577/wd/hub"), capability);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
-    	
-    	
-    	// hay que pasar por parametro el "platform" que define el OS y setear el "BrowserName". esto debe de hacerse en el jenkins
-    	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
-    	
-    	String url = System.getProperty("webdriver.url");
-    	System.out.println(url);
-    	driver = null;
-    	try {
-//            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5566/wd/hub"), capability);
-    		driver = new RemoteWebDriver(new URL(url), capability);
-    		
-    		
-//    		driver = new RemoteWebDriver(new URL("http://192.168.1.35:5522/wd/hub"), capability); // tete
-//    		driver = new RemoteWebDriver(new URL("http://10.0.2.15:5577/wd/hub"), capability);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
     	driver.get(URL);
     	

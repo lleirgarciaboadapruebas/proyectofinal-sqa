@@ -1,6 +1,7 @@
 package application.coches.test;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -26,26 +27,26 @@ public class Test1 extends ABaseTestCase {
         setDetailValidation(false);
     }
 
-    @Test
+    @Ignore @Test
     public void t_ir_listado_coches() throws Exception{
         Coches.process.irListadoCoches();
     }
 
-    @Test
+    @Ignore @Test
     public void t_validar_pantalla_creacion_coche() throws Exception {
         Coches.process.irListadoCoches();
         Coches.steps.crear();
         Coches.validaciones.validarPantallaCreacion(true);
     }
 
-    @Test
+    @Ignore  @Test
     public void t_validar_pantalla_vista_coche() throws Exception {
         Coches.process.irListadoCoches();
         Coches.steps.editarEnListado("matriculaexistente");
         Coches.validaciones.validarPantallaVista(true);
     }
 
-    @Test
+    @Ignore @Test
     public void t_validar_pantalla_edicion_coche() throws Exception {
         Coches.process.irListadoCoches();
         Coches.steps.editarEnListado("matriculaexistente");
@@ -53,13 +54,13 @@ public class Test1 extends ABaseTestCase {
         Coches.validaciones.validarPantallaModificacion(true);
     }
 
-    @Test
+    @Ignore @Test
     public void t_crear_coche_exito() throws Exception {
         Coches.process.crearCoche("" + GenericUtils.randomNumberSpecificRange(0, 9), "Nissan", "Almera", "200000", "4526-9545-5654-5454", "");
 
     }
     
-    @Test public void t_validar_clientes_existentes() throws Exception {
+    @Ignore @Test public void t_validar_clientes_existentes() throws Exception {
         String nif = GenericUtils.randomNumberSpecificRange(1, 1000) + "N";
         String nombre = "Pepe";
         String apellidos = "Rubianes";
@@ -71,18 +72,18 @@ public class Test1 extends ABaseTestCase {
         Coches.validaciones.validarClienteSeleccionableEnCreacionCoche(complete);
     }
 
-    @Test public void t_validar_cliente_creado_existente() throws Exception{
+    @Ignore @Test public void t_validar_cliente_creado_existente() throws Exception{
 
     }
 
-    @Test public void t_validar_creacion_listado() throws Exception {
+    @Ignore @Test public void t_validar_creacion_listado() throws Exception {
         String matricula = "2304 HPE";
         Coches.process.irListadoCoches();
         Coches.process.crearCoche(matricula, "Mercedes", "CLK 200", "180000", "3424-5433-2345-3424", "Cliente");
         Coches.validaciones.validarCreacionEnListado(matricula);
     }
 
-    @Test public void t_validar_filtro_modelo(){
+    @Ignore @Test public void t_validar_filtro_modelo(){
         String modelo = "Clio";
         Coches.process.irListadoCoches();
         Coches.process.filtrarPor(modelo, null, null, null);

@@ -26,7 +26,7 @@ public class CochesSteps extends AbstractStepsAndNavigation<CochesAtributos, Coc
 
     public void crear(){
         driver.writeStep(driver.getNameMethod());
-        driver.waitForElementPresentWithCss(atributos.selectorBtnCrear);
+        driver.waitForElementPresentWithId(atributos.btnCrearId);
         validations.validarExistenciaButtonCrearCoche(validations.isDetailed());
         driver.clickByCss(atributos.selectorBtnCrear);
         validations.validarPantallaCreacion(validations.isDetailed());

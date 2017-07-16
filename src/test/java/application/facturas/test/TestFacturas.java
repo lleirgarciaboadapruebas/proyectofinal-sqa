@@ -1,8 +1,10 @@
 package application.facturas.test;
 
-import application.facturas.main.Factura;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import application.facturas.main.Factura;
 import selenium_tools.ABaseTestCase;
 
 /**
@@ -10,25 +12,25 @@ import selenium_tools.ABaseTestCase;
  */
 public class TestFacturas extends ABaseTestCase {
 
-    @Test
+	@Ignore @Test
     public void validar_navegacion_a_listado() throws Exception {
         Factura.process.irListadoFacturas();
         Factura.validaciones.validarPantallaListado(true);
     }
 
-    @Test
+    @Ignore @Test
     public void validar_creacion_factura_en_listado() throws Exception {
         Factura.process.irListadoFacturas();
         Factura.process.crearFacturaSinConcepto("cliente real", "", "", "", "", "", "coche real de cliente");
         Factura.validaciones.validarFacturaExistenteEnListado("codigo", true);
     }
 
-    @Test
+    @Ignore @Test
     public void validar_edicion_factura_en_listado() throws Exception {
 
     }
 
-    @Test
+    @Ignore @Test
     public void validar_anadir_concepto_en_creacion_factura() throws Exception {
 
     }

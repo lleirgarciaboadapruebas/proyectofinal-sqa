@@ -524,9 +524,6 @@ public class ADriverUtils {
             boolean ok2 = StringUtils.equals(it2, expect2);
             boolean ok3 = StringUtils.equals(it3, expect3);
 
-            System.out.println("pos 1: "+ it1 +"'        pos 2: "+ it2 +"        pos 3: "+ it3);
-            System.out.println("ex 1: "+ expect1 +"'     ex 2: "+ expect2 +"     ex 3: "+ expect3);
-            
             if (ok1 && ok2 && ok3)
                 return tr;
         }
