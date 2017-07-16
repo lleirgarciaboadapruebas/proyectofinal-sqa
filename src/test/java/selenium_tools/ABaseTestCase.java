@@ -130,7 +130,7 @@ public abstract class ABaseTestCase{
 	    	  resource_webdriver += "geckodriver.exe";
          
           System.setProperty(CHROME_DRIVER_PROPERTY, resource_webdriver.isEmpty() ? 
-        		  "C:\\Users\\Lleir Garcia\\git\\proyectofinal-sqa2\\resource\\drivers\\chromedriver.exe" :
+        		  "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/drivers/chromedriver.exe" :
         			  resource_webdriver);
           System.out.println(resource_webdriver);
           ArrayList<String> oList = new ArrayList<String>();
