@@ -116,9 +116,7 @@ public abstract class ABaseTestCase{
     @Before
     public void seleniumRemoteHubWebDriver() {
     	DesiredCapabilities capability = null;
-//    	System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
-//      System.setProperty(CHROME_DRIVER_NAME, "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
-    	
+
     	if(System.getProperty("remote")==null){
     	    ChromeOptions o = new ChromeOptions();
           System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
@@ -128,7 +126,7 @@ public abstract class ABaseTestCase{
           o.addArguments(oList);
           driver = new ChromeDriver(o);
           driver.get(URL);
-          wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
+          wait = new WebDriverWait(driver, TIMEOUT_SECONDS);          
     	} 
     	
     	else {
@@ -140,10 +138,7 @@ public abstract class ABaseTestCase{
 	    		capability = DesiredCapabilities.chrome();
 	    	else if(StringUtils.equals(browser, "firefox"))
 	    		capability = DesiredCapabilities.firefox();
-	    	
-	    	
-	    	// elses IE
-	    	
+	
 	    	capability.setBrowserName(browser);
 	    	
 	    	String platform = System.getProperty("webdriver.platform.name");
@@ -162,12 +157,7 @@ public abstract class ABaseTestCase{
 	    	System.out.println(url);
 	    	driver = null;
 	    	try {
-	//            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5566/wd/hub"), capability);
-	    		driver = new RemoteWebDriver(new URL(url), capability);
-	    		
-	    		
-	//    		driver = new RemoteWebDriver(new URL("http://192.168.1.35:5522/wd/hub"), capability); // tete
-	//    		driver = new RemoteWebDriver(new URL("http://10.0.2.15:5577/wd/hub"), capability);
+	            driver = new RemoteWebDriver(new URL(url), capability);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
