@@ -78,7 +78,7 @@ public abstract class ABaseTestCase{
     protected final String SELENIUM_SCREENSHOTS = "selenium.screenshot.dir";
     protected final String IE_DRIVER_PROPERTY = "webdriver.ie.driver";
     protected final String IE_DRIVER_NAME = "IEDriverServer.exe";
-    protected final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
+    protected final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver"; 
     protected final String CHROME_DRIVER_NAME = "chromedriver.exe";
     protected final String GECKO_DRIVER_PROPERTY = "webdriver.gecko.driver";
     protected final String GECKO_DRIVER_NAME = "geckodriver.exe";
@@ -168,6 +168,8 @@ public abstract class ABaseTestCase{
 	    	
 	    	String url = System.getProperty("webdriver.url");
 	    	System.out.println(url); 
+	    	
+	    	System.out.println(System.getProperty("webdriver.dir"));
 	    	
 	    	System.setProperty(CHROME_DRIVER_PROPERTY, System.getProperty("webdriver.dir"));
 	    	System.out.println(System.getProperty(CHROME_DRIVER_NAME));
