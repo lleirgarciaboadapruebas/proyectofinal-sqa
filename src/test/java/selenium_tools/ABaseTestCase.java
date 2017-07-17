@@ -170,11 +170,13 @@ public abstract class ABaseTestCase{
 	    	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
 	    	
 	    	String url = System.getProperty("webdriver.url");
-	    	System.out.println("URL Inicial: "+ url); 
-	    
-	    	
+	    	System.out.println("IP Nodo: "+ url); 
+	    	    	
 	    	System.setProperty("webdriver.chrome.driver", "path.dir");
 	    	capability.setCapability("chrome.binary", "binaries");
+	    	
+	    	System.out.println("Driver Path: "+ System.getProperty("webdriver.chrome.driver", "path.dir"));
+	    	System.out.println(capability.getCapability("chrome.binary"));
 	    	
 	    	driver = null;
 	    	try {
@@ -184,8 +186,10 @@ public abstract class ABaseTestCase{
 				e.printStackTrace();
 			}
     	}
+    	
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-    	System.out.println(URL);
+    	
+    	System.out.println("URL Navegador: "+ URL);
     	driver.get(URL);
     	
     	System.out.println("************************************************************");
