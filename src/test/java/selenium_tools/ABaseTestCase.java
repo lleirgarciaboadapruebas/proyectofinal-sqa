@@ -98,7 +98,7 @@ public abstract class ABaseTestCase{
 
 
     private static final String URL1 = "https://localhost/tallerlavi3";
-    private static final String URL = "192.168.204.16/tallerlavi";
+    private static final String URL = "192.168.204.16/tallerlavi/";
 
 //    @Before
 //    public void seleniumIni() throws Exception {
@@ -179,6 +179,7 @@ public abstract class ABaseTestCase{
 			}
     	}
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
+    	System.out.println(URL);
     	driver.get(URL);
     	
     	System.setProperty(SELENIUM_SCREENSHOTS, "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/screenshots");
