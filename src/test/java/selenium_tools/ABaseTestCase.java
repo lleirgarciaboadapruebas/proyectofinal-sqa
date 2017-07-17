@@ -169,6 +169,8 @@ public abstract class ABaseTestCase{
 	    	String url = System.getProperty("webdriver.url");
 	    	System.out.println(url); 
 	    	
+	    	System.setProperty(CHROME_DRIVER_PROPERTY, System.getProperty("webdriver.dir"));
+	    	
 	    	driver = null;
 	    	try {
 	            driver = new RemoteWebDriver(new URL(url), capability);
