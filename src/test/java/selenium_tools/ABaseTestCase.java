@@ -98,7 +98,8 @@ public abstract class ABaseTestCase{
 
 
     private static final String URL1 = "https://localhost/tallerlavi3";
-    private static final String URL = "http://192.168.204.16/tallerlavi/";
+//    private static final String URL = "http://192.168.204.16/tallerlavi/";
+    private static final String URL = "http://192.168.1.42/tallerlavi/";
 
 //    @Before
 //    public void seleniumIni() throws Exception {
@@ -156,6 +157,10 @@ public abstract class ABaseTestCase{
 	    	String platform = System.getProperty("webdriver.platform.name");
 	    	System.out.println(platform);
 	    	
+	    	String driveer = System.getProperty("dir.driver");
+	    	System.out.println(driver +"   dafsasdfasdf");
+	    	System.setProperty("webdriver.chrome.driver", driveer);
+	    	
 	    	if(StringUtils.equals(platform, "MAC")){
 	    		capability.setPlatform(Platform.MAC);
 	    	} else if(StringUtils.equals(platform, "WIN10")){
@@ -169,6 +174,7 @@ public abstract class ABaseTestCase{
 	    	String url = System.getProperty("webdriver.url");
 	    	System.out.println(url); 
 	    
+	    	
 	    	
 	    	driver = null;
 	    	try {
