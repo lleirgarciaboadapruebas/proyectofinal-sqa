@@ -119,20 +119,26 @@ public abstract class ABaseTestCase{
     	DesiredCapabilities capability = new DesiredCapabilities();
     	
     	System.out.println("************************************************************");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
+    	System.out.println("");
     	
     	if(System.getProperty("remote")==null){
     	    ChromeOptions o = new ChromeOptions();
-
-    	  String resource_webdriver = System.getProperty("webdriver.resource.driver");
+    	    
+    	    System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
+//    	  String resource_webdriver = System.getProperty("C:\\Users\\Lleir Garcia\\git\\proyectofinal-sqa2\\resource\\drivers\\");
           String browse = System.getProperty("browse.name");
+//          
+//          if(StringUtils.equals(browse, "chrome"))
+//        	  resource_webdriver += "chromedriver.exe";
+//	      else if(StringUtils.equals(browse, "firefox"))
+//	    	  resource_webdriver += "geckodriver.exe";
           
-          if(StringUtils.equals(browse, "chrome"))
-        	  resource_webdriver += "chromedriver.exe";
-	      else if(StringUtils.equals(browse, "firefox"))
-	    	  resource_webdriver += "geckodriver.exe";
-        
+//          System.setProperty("webdriver.resource.driver", resource_webdriver);
           
-          System.out.println(resource_webdriver);
+//          System.out.println(resource_webdriver);
           ArrayList<String> oList = new ArrayList<String>();
           oList.add("--start-maximize");
           oList.add("--incognito");
