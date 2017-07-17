@@ -117,30 +117,32 @@ public abstract class ABaseTestCase{
     @Before
     public void seleniumRemoteHubWebDriver() {
     	DesiredCapabilities capability = new DesiredCapabilities();
-//    	
-//    	if(System.getProperty("remote")==null){
-//    	    ChromeOptions o = new ChromeOptions();
-//
-//    	  String resource_webdriver = System.getProperty("webdriver.resource.driver");
-//          String browse = System.getProperty("browse.name");
-//          
-//          if(StringUtils.equals(browse, "chrome"))
-//        	  resource_webdriver += "chromedriver.exe";
-//	      else if(StringUtils.equals(browse, "firefox"))
-//	    	  resource_webdriver += "geckodriver.exe";
-//        
-//          
-//          System.out.println(resource_webdriver);
-//          ArrayList<String> oList = new ArrayList<String>();
-//          oList.add("--start-maximize");
-//          oList.add("--incognito");
-//          o.addArguments(oList);
-//          driver = new ChromeDriver(o);
-//          driver.get(URL);
-//          wait = new WebDriverWait(driver, TIMEOUT_SECONDS);          
-//    	} 
-//    	
-//    	else {
+    	
+    	System.out.println("************************************************************");
+    	
+    	if(System.getProperty("remote")==null){
+    	    ChromeOptions o = new ChromeOptions();
+
+    	  String resource_webdriver = System.getProperty("webdriver.resource.driver");
+          String browse = System.getProperty("browse.name");
+          
+          if(StringUtils.equals(browse, "chrome"))
+        	  resource_webdriver += "chromedriver.exe";
+	      else if(StringUtils.equals(browse, "firefox"))
+	    	  resource_webdriver += "geckodriver.exe";
+        
+          
+          System.out.println(resource_webdriver);
+          ArrayList<String> oList = new ArrayList<String>();
+          oList.add("--start-maximize");
+          oList.add("--incognito");
+          o.addArguments(oList);
+          driver = new ChromeDriver(o);
+          driver.get(URL);
+          wait = new WebDriverWait(driver, TIMEOUT_SECONDS);          
+    	} 
+    	
+    	else {
     	
     		
 	    	String browser = System.getProperty("browse.name");
@@ -171,20 +173,22 @@ public abstract class ABaseTestCase{
 	    	System.out.println("URL Inicial: "+ url); 
 	    
 	    	
-	    	System.setProperty("webdriver.chrome.driver", "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
+	    	System.setProperty("webdriver.chrome.driver", "path.dir");
 	    	capability.setCapability("chrome.binary", "binaries");
 	    	
 	    	driver = null;
 	    	try {
-	            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5599/wd/hub"), capability);
+	            driver = new RemoteWebDriver(new URL(url), capability);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//    	}
+    	}
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
     	System.out.println(URL);
     	driver.get(URL);
+    	
+    	System.out.println("************************************************************");
     	
     	System.setProperty(SELENIUM_SCREENSHOTS, "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/screenshots");
     }
