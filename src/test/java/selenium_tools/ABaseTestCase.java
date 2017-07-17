@@ -118,6 +118,7 @@ public abstract class ABaseTestCase{
     public void seleniumRemoteHubWebDriver() {
     	DesiredCapabilities capability = null;
 
+    	System.out.println(System.getProperty("remote")+"remotooooo");
     	if(System.getProperty("remote")==null){
     	    ChromeOptions o = new ChromeOptions();
 
