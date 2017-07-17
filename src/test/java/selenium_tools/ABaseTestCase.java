@@ -116,51 +116,46 @@ public abstract class ABaseTestCase{
 //    }
     @Before
     public void seleniumRemoteHubWebDriver() {
-    	DesiredCapabilities capability = null;
-
-    	System.out.println(System.getProperty("remote")+"remotooooo");
-    	if(System.getProperty("remote")==null){
-    	    ChromeOptions o = new ChromeOptions();
-
-    	  String resource_webdriver = System.getProperty("webdriver.resource.driver");
-          String browse = System.getProperty("browse.name");
-
-          
-          if(StringUtils.equals(browse, "chrome"))
-        	  resource_webdriver += "chromedriver.exe";
-	      else if(StringUtils.equals(browse, "firefox"))
-	    	  resource_webdriver += "geckodriver.exe";
-        
-          
-          System.out.println(resource_webdriver);
-          ArrayList<String> oList = new ArrayList<String>();
-          oList.add("--start-maximize");
-          oList.add("--incognito");
-          o.addArguments(oList);
-          driver = new ChromeDriver(o);
-          driver.get(URL);
-          wait = new WebDriverWait(driver, TIMEOUT_SECONDS);          
-    	} 
+    	DesiredCapabilities capability = new DesiredCapabilities();
+//    	
+//    	if(System.getProperty("remote")==null){
+//    	    ChromeOptions o = new ChromeOptions();
+//
+//    	  String resource_webdriver = System.getProperty("webdriver.resource.driver");
+//          String browse = System.getProperty("browse.name");
+//          
+//          if(StringUtils.equals(browse, "chrome"))
+//        	  resource_webdriver += "chromedriver.exe";
+//	      else if(StringUtils.equals(browse, "firefox"))
+//	    	  resource_webdriver += "geckodriver.exe";
+//        
+//          
+//          System.out.println(resource_webdriver);
+//          ArrayList<String> oList = new ArrayList<String>();
+//          oList.add("--start-maximize");
+//          oList.add("--incognito");
+//          o.addArguments(oList);
+//          driver = new ChromeDriver(o);
+//          driver.get(URL);
+//          wait = new WebDriverWait(driver, TIMEOUT_SECONDS);          
+//    	} 
+//    	
+//    	else {
     	
-    	else {
-    	
+    		
 	    	String browser = System.getProperty("browse.name");
-	    	System.out.println("browseeee ++++++++++++++++++++++ "+ browser);
 	    	
-	    	if(StringUtils.equals(browser, "chrome"))
-	    		capability = DesiredCapabilities.chrome();
-	    	else if(StringUtils.equals(browser, "firefox"))
-	    		capability = DesiredCapabilities.firefox();
+	    	if(browser!=null)
+		    	if(StringUtils.equals(browser, "chrome"))
+		    		capability = DesiredCapabilities.chrome();
+		    	else if(StringUtils.equals(browser, "firefox"))
+		    		capability = DesiredCapabilities.firefox();
 	
 	    	capability.setBrowserName(browser);
-	    	System.out.println(browser);
+	    	System.out.println("Navegador: "+ browser);
 	    	
 	    	String platform = System.getProperty("webdriver.platform.name");
-	    	System.out.println(platform);
-	    	
-	    	String driveer = System.getProperty("dir.driver");
-	    	System.out.println(driver +"   dafsasdfasdf");
-	    	System.setProperty("webdriver.chrome.driver", driveer);
+	    	System.out.println("Sistema Operativo: " + platform);
 	    	
 	    	if(StringUtils.equals(platform, "MAC")){
 	    		capability.setPlatform(Platform.MAC);
@@ -173,18 +168,20 @@ public abstract class ABaseTestCase{
 	    	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
 	    	
 	    	String url = System.getProperty("webdriver.url");
-	    	System.out.println(url); 
+	    	System.out.println("URL Inicial: "+ url); 
 	    
 	    	
+	    	System.setProperty("webdriver.chrome.driver", "/Users/lleir/IdeaProjects/proyectofinal-sqa/resource/drivers/chromedriver_mac");
+	    	capability.setCapability("chrome.binary", "binaries");
 	    	
 	    	driver = null;
 	    	try {
-	            driver = new RemoteWebDriver(new URL(url), capability);
+	            driver = new RemoteWebDriver(new URL("http://192.168.1.41:5599/wd/hub"), capability);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    	}
+//    	}
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
     	System.out.println(URL);
     	driver.get(URL);
@@ -287,7 +284,7 @@ public abstract class ABaseTestCase{
 //         Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
 //         Thread.sleep(1000);
 //         Runtime.getRuntime().exec("taskkill /F /IM WerFault.exe");
-		driver.quit();
+//		driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
