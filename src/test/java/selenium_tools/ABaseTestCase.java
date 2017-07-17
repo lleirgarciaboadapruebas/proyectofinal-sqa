@@ -168,11 +168,7 @@ public abstract class ABaseTestCase{
 	    	
 	    	String url = System.getProperty("webdriver.url");
 	    	System.out.println(url); 
-	    	
-	    	System.out.println(System.getProperty("webdriver.dir"));
-	    	
-	    	System.setProperty(CHROME_DRIVER_PROPERTY, System.getProperty("webdriver.dir"));
-	    	System.out.println(System.getProperty(CHROME_DRIVER_NAME));
+	    
 	    	
 	    	driver = null;
 	    	try {
