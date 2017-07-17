@@ -76,7 +76,6 @@ public class TestCoches extends ABaseTestCase {
         Factura.validaciones.validarComboCocheVisible(true);
         Factura.validaciones.validarCocheSeleccionable(marca, modelo, matricula, true);
         
-
     }
 
 
