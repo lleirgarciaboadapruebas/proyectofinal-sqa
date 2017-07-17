@@ -98,7 +98,7 @@ public abstract class ABaseTestCase{
 
 
     private static final String URL1 = "https://localhost/tallerlavi3";
-    private static final String URL = "https://192.168.1.42/tallerlavi_git";
+    private static final String URL = "http://localhost/tallerlavi";
 
 //    @Before
 //    public void seleniumIni() throws Exception {
