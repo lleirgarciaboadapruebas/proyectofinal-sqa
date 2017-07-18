@@ -14,7 +14,6 @@ public class TestCliente extends ABaseTestCase {
 
     @Before
     public void ini() {
-        setBaseUrl("192.168.1.42/tallerlavi3/");
         setTestNameClass(this.getClass().getName());
         setDetailValidation(false);
     }
