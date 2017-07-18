@@ -98,8 +98,7 @@ public abstract class ABaseTestCase{
 
 
     private static final String URL1 = "https://localhost/tallerlavi3";
-//    private static final String URL = "http://192.168.204.16/tallerlavi/";
-    private static final String URL = "http://192.168.1.42/tallerlavi/";
+    private static final String URL = "http://192.168.204.16/tallerlavi/";
 
 //    @Before
 //    public void seleniumIni() throws Exception {
@@ -116,29 +115,22 @@ public abstract class ABaseTestCase{
 //    }
     @Before
     public void seleniumRemoteHubWebDriver() {
-    	DesiredCapabilities capability = new DesiredCapabilities();
-    	
-    	System.out.println("************************************************************");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	
+    	DesiredCapabilities capability = null;
+
     	if(System.getProperty("remote")==null){
     	    ChromeOptions o = new ChromeOptions();
-    	    
-    	    System.setProperty(CHROME_DRIVER_PROPERTY, "C:/Users/Lleir Garcia/git/proyectofinal-sqa/resource/drivers/chromedriver.exe");
-//    	  String resource_webdriver = System.getProperty("C:\\Users\\Lleir Garcia\\git\\proyectofinal-sqa2\\resource\\drivers\\");
+
+    	  String resource_webdriver = System.getProperty("webdriver.resource.driver");
           String browse = System.getProperty("browse.name");
-//          
-//          if(StringUtils.equals(browse, "chrome"))
-//        	  resource_webdriver += "chromedriver.exe";
-//	      else if(StringUtils.equals(browse, "firefox"))
-//	    	  resource_webdriver += "geckodriver.exe";
+
           
-//          System.setProperty("webdriver.resource.driver", resource_webdriver);
+          if(StringUtils.equals(browse, "chrome"))
+        	  resource_webdriver += "chromedriver.exe";
+	      else if(StringUtils.equals(browse, "firefox"))
+	    	  resource_webdriver += "geckodriver.exe";
+        
           
-//          System.out.println(resource_webdriver);
+          System.out.println(resource_webdriver);
           ArrayList<String> oList = new ArrayList<String>();
           oList.add("--start-maximize");
           oList.add("--incognito");
@@ -150,20 +142,19 @@ public abstract class ABaseTestCase{
     	
     	else {
     	
-    		
 	    	String browser = System.getProperty("browse.name");
+	    	System.out.println("browseeee ++++++++++++++++++++++ "+ browser);
 	    	
-	    	if(browser!=null)
-		    	if(StringUtils.equals(browser, "chrome"))
-		    		capability = DesiredCapabilities.chrome();
-		    	else if(StringUtils.equals(browser, "firefox"))
-		    		capability = DesiredCapabilities.firefox();
+	    	if(StringUtils.equals(browser, "chrome"))
+	    		capability = DesiredCapabilities.chrome();
+	    	else if(StringUtils.equals(browser, "firefox"))
+	    		capability = DesiredCapabilities.firefox();
 	
 	    	capability.setBrowserName(browser);
-	    	System.out.println("Navegador: "+ browser);
+	    	System.out.println(browser);
 	    	
 	    	String platform = System.getProperty("webdriver.platform.name");
-	    	System.out.println("Sistema Operativo: " + platform);
+	    	System.out.println(platform);
 	    	
 	    	if(StringUtils.equals(platform, "MAC")){
 	    		capability.setPlatform(Platform.MAC);
@@ -176,15 +167,8 @@ public abstract class ABaseTestCase{
 	    	// hay que vigilar con las IPs de los PCs ya que pueden ir cambiando
 	    	
 	    	String url = System.getProperty("webdriver.url");
-	    	System.out.println("IP Nodo: "+ url); 
-	    	    	
-	    	System.setProperty("webdriver.chrome.driver", "path.dir");
-	    	System.out.println("path.dir");
-	    	System.out.println("webdriver.chrome.driver");System.out.println("chrome.binary");
-	    	capability.setCapability("", "binaries");
-	    	
-//	    	System.out.println("Driver Path: "+ System.getProperty("webdriver.chrome.driver", "path.dir"));
-	    	System.out.println(capability.getCapability("chrome.binary"));
+	    	System.out.println(url); 
+	    
 	    	
 	    	driver = null;
 	    	try {
@@ -194,13 +178,9 @@ public abstract class ABaseTestCase{
 				e.printStackTrace();
 			}
     	}
-    	
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-    	
-    	System.out.println("URL Navegador: "+ URL);
+    	System.out.println(URL);
     	driver.get(URL);
-    	
-    	System.out.println("************************************************************");
     	
     	System.setProperty(SELENIUM_SCREENSHOTS, "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/screenshots");
     }
@@ -300,7 +280,7 @@ public abstract class ABaseTestCase{
 //         Runtime.getRuntime().exec("taskkill /F /IM firefox.exe");
 //         Thread.sleep(1000);
 //         Runtime.getRuntime().exec("taskkill /F /IM WerFault.exe");
-//		driver.quit();
+		driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
