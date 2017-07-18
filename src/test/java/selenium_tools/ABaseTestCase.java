@@ -181,7 +181,7 @@ public abstract class ABaseTestCase{
     	}
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
     	System.out.println("http://192.168.204.16/tallerlavi"); 
-    	driver.get(URL);
+    	driver.get("http://192.168.204.16/tallerlavi");
     	
     	System.setProperty(SELENIUM_SCREENSHOTS, "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/screenshots");
     }
