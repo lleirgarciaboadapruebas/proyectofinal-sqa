@@ -179,9 +179,11 @@ public abstract class ABaseTestCase{
 	    	System.out.println("IP Nodo: "+ url); 
 	    	    	
 	    	System.setProperty("webdriver.chrome.driver", "path.dir");
-	    	capability.setCapability("chrome.binary", "binaries");
+	    	System.out.println("path.dir");
+	    	System.out.println("webdriver.chrome.driver");System.out.println("chrome.binary");
+	    	capability.setCapability("", "binaries");
 	    	
-	    	System.out.println("Driver Path: "+ System.getProperty("webdriver.chrome.driver", "path.dir"));
+//	    	System.out.println("Driver Path: "+ System.getProperty("webdriver.chrome.driver", "path.dir"));
 	    	System.out.println(capability.getCapability("chrome.binary"));
 	    	
 	    	driver = null;
