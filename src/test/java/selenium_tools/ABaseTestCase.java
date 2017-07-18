@@ -170,7 +170,6 @@ public abstract class ABaseTestCase{
 	    	System.out.println(url); 
 	    	
 	    	
-	    	System.out.println("URL dNavegador"+ URL);
 	    	
 	    	driver = null;
 	    	try {
@@ -181,7 +180,7 @@ public abstract class ABaseTestCase{
 			}
     	}
     	wait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-    	System.out.println(URL);
+    	System.out.println("http://192.168.204.16/tallerlavi"); 
     	driver.get(URL);
     	
     	System.setProperty(SELENIUM_SCREENSHOTS, "C:/Users/Lleir Garcia/git/proyectofinal-sqa2/resource/screenshots");
