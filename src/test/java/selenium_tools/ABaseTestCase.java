@@ -168,7 +168,9 @@ public abstract class ABaseTestCase{
 	    	
 	    	String url = System.getProperty("webdriver.url");
 	    	System.out.println(url); 
-	    
+	    	
+	    	
+	    	System.out.println("URL dNavegador"+ URL);
 	    	
 	    	driver = null;
 	    	try {
